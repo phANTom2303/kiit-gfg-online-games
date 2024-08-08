@@ -1,65 +1,13 @@
-/* SCROLLING BAR */
-::-webkit-scrollbar {
-    width: 3px;
-}
-
-::-webkit-scrollbar-track {
-    background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-    background: #888;
-    border-radius: 5px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: #555;
-}
-
-/* Scroll bar code ends */
-
 body {
-    margin: 0;
-    background-color: #070F2B;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-.cardList {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-@media (min-width: 1200px) {
-    .cardList>* {
-        width: 23%;
-    }
-}
-
-@media (min-width: 900px) and (max-width: 1200px) {
-    .cardList>* {
-        width: 30%;
-    }
-}
-
-@media (min-width: 851px) and (max-width: 899px) {
-    .cardList>* {
-        width: 47%;
-    }
-}
-
-@media (min-width: 601px) and (max-width: 850px) {
-    .cardList>* {
-        width: 45%;
-    }
-}
-
-@media (min-width: 411px) and (max-width: 600px) {
-    .cardList>* {
-        width: 80%;
-    }
-}
-
-@media (max-width: 410px) {
-    .cardList>* {
-        width: 90%;
-    }
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
 }
