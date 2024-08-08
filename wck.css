@@ -1,0 +1,153 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    background: yellow;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.sidebar {
+    height: 100%;
+    width: 160px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #405189;
+    padding-top: 16px;
+    text-align: left;
+}
+
+.sidebar i {
+    color: #f1f1f1;
+    padding: 2px 50px;
+    font-size: 40px;
+}
+
+.sidebar ul li {
+    list-style: none;
+
+}
+
+.sidebar a {
+    padding: 30px 0px;
+    text-decoration: none;
+    font-size: 20px;
+    color: #fff;
+    display: block;
+    transition: 0.3s ease-in;
+}
+
+.sidebar a:hover {
+    color: aquamarine;
+}
+
+#board{
+    height: 390px;
+    width: 390px;
+    /* background-color: green; */
+    
+    margin:0 auto;
+    display: flex;
+    flex-wrap: wrap;
+
+    background-image: url('soil.png');
+    background-size: cover;
+    border: 3px solid white;
+    border-radius: 25px;
+    position: relative;
+    left: -1px;
+    bottom: 13px;
+
+}
+
+#board div{
+    width: 130px;
+    height: 130px;
+    background-image: url("pipe.png");
+    background-size: cover ;
+}
+
+#board div img {
+    width: 100px;
+    height: 100px;
+
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
+#board div img:hover{
+    cursor: pointer;
+    box-shadow: 0 0 30px;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .sidebar {
+        width: 120px;
+    }
+
+    .sidebar i {
+        padding: 2px 30px;
+        font-size: 30px;
+    }
+
+    .sidebar a {
+        font-size: 16px;
+        padding: 20px 0;
+    }
+
+    #board {
+        height: 300px;
+        width: 300px;
+    }
+
+    #board div {
+        width: 100px;
+        height: 100px;
+    }
+
+    #board div img {
+        width: 80px;
+        height: 80px;
+    }
+}
+
+@media (max-width: 767px) {
+    .sidebar {
+        width: 80px;
+    }
+
+    .sidebar i {
+        padding: 2px 20px;
+        font-size: 24px;
+    }
+
+    .sidebar a {
+        font-size: 10px;
+        padding: 15px 0;
+    }
+
+    #board {
+        height: 240px;
+        width: 240px;
+    }
+
+    #board div {
+        width: 80px;
+        height: 80px;
+    }
+
+    #board div img {
+        width: 60px;
+        height: 60px;
+    }
+}   
+
+@media (max-width: 1666px) {
+    body {
+        background: yellow;
+    }
+}
