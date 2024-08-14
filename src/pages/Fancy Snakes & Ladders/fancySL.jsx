@@ -5,7 +5,7 @@ import './fancySL.css';
 function FancySL() {
     const [playerCount, setPlayerCount] = useState(0);
     const [playerPostions, updatePlayerPositions] = useState(Array(6).fill(null));
-    const [message, updateMessage] = useState(null);
+    const [message, updateMessage] = useState("Waiting for Dice Roll...");
     const [currentPlayer, updateCurrentPlayer] = useState(0);
 
     function createPlayers(pCount) {
@@ -49,9 +49,13 @@ function FancySL() {
     }
 
     function gameLoop() {
+
         const moves = rollDice();
         movePlayer(currentPlayer, moves);
-        updateMessage(moves);
+
+        const newMsg = "Player " + (currentPlayer + 1) + " rolled a " + moves;
+        updateMessage(newMsg);
+
         if (currentPlayer < playerCount - 1)
             updateCurrentPlayer(currentPlayer + 1);
         else
@@ -69,8 +73,11 @@ function FancySL() {
     else {
         return (
             <div className="fancySL">
-                Player Count = {playerCount} Dice : {message}
-                <button onClick={() => gameLoop()}>One Move</button>
+                <div>
+                    <span>Current  Player : {currentPlayer + 1} </span>
+                    <button onClick={() => gameLoop()}> Roll Dice </button>
+                </div>
+                <div>{message}</div>
                 <div className="row">
                     <FancySLTile tileNumber={99} playerPos={playerPostions} />
                     <FancySLTile tileNumber={98} playerPos={playerPostions} />
