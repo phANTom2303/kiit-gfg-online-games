@@ -1,0 +1,16 @@
+.selectPlayer {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    
+}
+
+.selectPlayer > div {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 10px auto;
+}
