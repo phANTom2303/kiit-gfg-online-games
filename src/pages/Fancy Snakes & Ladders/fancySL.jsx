@@ -5,7 +5,9 @@ import './fancySL.css';
 function FancySL() {
     const [playerCount, setPlayerCount] = useState(0);
     const [playerPostions, updatePlayerPositions] = useState(Array(6).fill(null));
-    const[message,updateMessage] = useState(null);
+    const [message, updateMessage] = useState(null);
+    const [currentPlayer, updateCurrentPlayer] = useState(0);
+
     function createPlayers(pCount) {
         switch (pCount) {
             case 1:
@@ -34,12 +36,27 @@ function FancySL() {
         }
     }
 
-    //AI generated
+    //AI generated start
     function rollDice() {
         return Math.floor(Math.random() * 6) + 1;
     }
-    //AI generated
+    //AI generated end
 
+    function movePlayer(player, moves) {
+        const newPos = playerPostions;
+        newPos[player] = newPos[player] + moves;
+        updatePlayerPositions(newPos);
+    }
+
+    function gameLoop() {
+        const moves = rollDice();
+        movePlayer(currentPlayer, moves);
+        updateMessage(moves);
+        if (currentPlayer < playerCount - 1)
+            updateCurrentPlayer(currentPlayer + 1);
+        else
+            updateCurrentPlayer(0);
+    }
 
 
     if (playerCount == 0) {
@@ -53,7 +70,7 @@ function FancySL() {
         return (
             <div className="fancySL">
                 Player Count = {playerCount} Dice : {message}
-                <button onClick={() => updateMessage(rollDice())}>Roll Dice</button>
+                <button onClick={() => gameLoop()}>One Move</button>
                 <div className="row">
                     <FancySLTile tileNumber={99} playerPos={playerPostions} />
                     <FancySLTile tileNumber={98} playerPos={playerPostions} />
