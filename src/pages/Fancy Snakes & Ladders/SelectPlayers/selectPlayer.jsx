@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styles from './selectPlayer.module.css'
-function SelectPlayers({ onSubmit }) {
+function SelectPlayers({ onSubmit, createPly}) {
     const [players, setPlayers] = useState(2);
 
     function decreasePlayer() {
@@ -17,6 +17,11 @@ function SelectPlayers({ onSubmit }) {
             setPlayers(players + 1);
     }
 
+    function onSubmitClicked(){
+        onSubmit(players);
+        createPly(players);
+    }
+
     return (
         <div className={styles.selectPlayer}>
             <p> Select Number of Players :</p>
@@ -25,7 +30,7 @@ function SelectPlayers({ onSubmit }) {
                 <div>{players}</div>
                 <button onClick={() => increasePlayer()}>+1</button>
             </div>
-            <button onClick={() => onSubmit(players)}>Submit</button>
+            <button onClick={() => onSubmitClicked()}>Submit</button>
         </div>
     );
 }
