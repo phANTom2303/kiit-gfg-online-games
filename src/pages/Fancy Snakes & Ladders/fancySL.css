@@ -7,7 +7,6 @@
     font-size: large;
 }
 
-
 .row {
     width: 300px;
     height: 30px;
@@ -18,35 +17,40 @@
     width: 10%;
     height: 100%;
     border: 1px solid white;
-} 
+}
 
 .slbox {
     display: flex;
     flex-wrap: wrap;
 }
 
-.fancySL .player{
+.fancySL .player {
     box-sizing: border-box;
     width: 10px;
     height: 10px;
     border-radius: 10px;
 }
 
-.fancySL .p1{
+.fancySL .p1 {
     background-color: red;
 }
-.fancySL .p2{
+
+.fancySL .p2 {
     background-color: green;
 }
-.fancySL .p3{
+
+.fancySL .p3 {
     background-color: blue;
 }
-.fancySL .p4{
+
+.fancySL .p4 {
     background-color: yellow;
 }
-.fancySL .p5{
+
+.fancySL .p5 {
     background-color: pink;
 }
-.fancySL .p6{
+
+.fancySL .p6 {
     background-color: orange;
 }

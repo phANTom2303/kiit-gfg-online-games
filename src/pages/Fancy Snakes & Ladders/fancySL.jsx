@@ -44,9 +44,10 @@ function FancySL() {
 
     function movePlayer(player, moves) {
         const newPos = playerPostions;
-        newPos[player] = newPos[player] + moves;
+        newPos[player] = newPos[player] +moves;
         updatePlayerPositions(newPos);
     }
+
 
     function gameLoop() {
 
@@ -62,6 +63,12 @@ function FancySL() {
             updateCurrentPlayer(0);
     }
 
+    function resetGame(){
+        updateMessage("Waiting for Dice Roll...");
+        updateCurrentPlayer(0);
+        updatePlayerPositions(Array(6).fill(null));
+        setPlayerCount(0);
+    }
 
     if (playerCount == 0) {
         return (
@@ -198,6 +205,7 @@ function FancySL() {
                     <FancySLTile tileNumber={8} playerPos={playerPostions} />
                     <FancySLTile tileNumber={9} playerPos={playerPostions} />
                 </div>
+                <button onClick={() => resetGame()}>Reset</button>
             </div>
         );
     }
