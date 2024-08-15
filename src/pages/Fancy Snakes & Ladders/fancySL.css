@@ -7,6 +7,13 @@
     font-size: large;
 }
 
+.slboard {
+    background-image: url("../../public/images/snake-and-ladders-board.jpeg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin: 10px auto;
+}
+
 .row {
     width: 300px;
     height: 30px;
@@ -16,7 +23,6 @@
 .fancySL .slbox {
     width: 10%;
     height: 100%;
-    border: 1px solid white;
 }
 
 .slbox {
