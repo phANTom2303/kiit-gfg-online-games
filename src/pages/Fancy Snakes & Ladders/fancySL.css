@@ -31,10 +31,13 @@
 }
 
 .fancySL .player {
+    flex-grow: 1;
     box-sizing: border-box;
     width: 10px;
     height: 10px;
     border-radius: 10px;
+    margin: auto auto;
+    border: 0.1px solid black;
 }
 
 .fancySL .p1 {
