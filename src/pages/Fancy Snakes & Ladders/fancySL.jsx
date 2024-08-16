@@ -8,6 +8,19 @@ function FancySL() {
     const [message, updateMessage] = useState("Waiting for Dice Roll...");
     const [currentPlayer, updateCurrentPlayer] = useState(0);
 
+    const [board, updateBoard] = useState([
+        0, 0, 0, 0, +34, 0, 0, 0, +56, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, +41, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, -4, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, +85, -6, 0,
+        0, 0, 0, 0, 0, -7, 0, 0, 0, 0,
+        0, +82, 0, 0, 0, 0, 0, 0, +90, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, -19, 0, 0, 0, 0, -65, 0, 0, 0,
+        0, 0, 0, 0, -37, 0, 0, 0, 0
+    ]);
+
     function createPlayers(pCount) {
         switch (pCount) {
             case 1:
@@ -46,21 +59,42 @@ function FancySL() {
         const newPos = playerPostions;
         newPos[player] = newPos[player] + moves;
         updatePlayerPositions(newPos);
+        return newPos[player];
+    }
+
+    function jumpPlayer(currentPlayer, newPlace) {
+        if (board[newPlace] != 0) {
+            let newMsg;
+            if (board[newPlace] < 0) {
+                newMsg = "Player " + (currentPlayer + 1) + "caught a snake";
+            }
+            else {
+                newMsg = "Player " + (currentPlayer + 1) + "got a ladder";
+            }
+            updateMessage(newMsg);
+            const jumpTo = Math.abs(newPlace);
+            const newPlayerPositions = playerPostions;
+            newPlayerPositions[currentPlayer] = jumpTo;
+            updatePlayerPositions(newPlayerPositions);
+        }
     }
 
 
     function gameLoop() {
 
         const moves = rollDice();
-        movePlayer(currentPlayer, moves);
+        const newPlace = movePlayer(currentPlayer, moves);
 
         const newMsg = "Player " + (currentPlayer + 1) + " rolled a " + moves;
         updateMessage(newMsg);
 
+        const thisPlayer = currentPlayer;
         if (currentPlayer < playerCount - 1)
             updateCurrentPlayer(currentPlayer + 1);
         else
             updateCurrentPlayer(0);
+
+        setTimeout(() => jumpPlayer(thisPlayer, newPlace), 500);
     }
 
     function resetGame() {
