@@ -20,7 +20,16 @@ function FancySL() {
         0, -19, 0, 0, 0, 0, -65, 0, 0, 0,
         0, 0, 0, 0, -37, 0, 0, 0, 0
     ]);
-
+    function logBoard() {
+        for (let i = 0; i <= 99; i++) {
+            if (board[i] < 0) {
+                console.log("At postion " + (i + 1) + " snake to " + (Math.abs(board[i]) + 1));
+            }
+            else if (board[i] > 0) {
+                console.log("At postion " + (i + 1) + " ladder to " + (board[i] + 1));
+            }
+        }
+    }
     function createPlayers(pCount) {
         switch (pCount) {
             case 1:
@@ -114,6 +123,7 @@ function FancySL() {
     else {
         return (
             <div className="fancySL">
+                {/* <button onClick={() => logBoard()}>logBoard</button> */}
                 <div>
                     <span>Current  Player : {currentPlayer + 1} </span>
                     <button onClick={() => gameLoop()}> Roll Dice </button>
