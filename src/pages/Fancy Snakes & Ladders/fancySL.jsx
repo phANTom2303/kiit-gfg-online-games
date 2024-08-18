@@ -81,7 +81,7 @@ function FancySL() {
                 newMsg = "Player " + (currentPlayer + 1) + "got a ladder";
             }
             updateMessage(newMsg);
-            const jumpTo = Math.abs(newPlace);
+            const jumpTo = Math.abs(board[newPlace]);
             const newPlayerPositions = playerPostions;
             newPlayerPositions[currentPlayer] = jumpTo;
             updatePlayerPositions(newPlayerPositions);
