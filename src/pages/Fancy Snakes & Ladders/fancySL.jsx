@@ -7,9 +7,11 @@ function FancySL() {
     const [playerPostions, updatePlayerPositions] = useState(Array(6).fill(null));
     const [message, updateMessage] = useState("Waiting for Dice Roll...");
     const [currentPlayer, updateCurrentPlayer] = useState(0);
+    const [winner, setWinner] = useState(-1);
+
 
     const [board, updateBoard] = useState([
-        0, 0, 0, 0, +34, 0, 0, 0, +56, 0,
+        0, 0, 0, 0, +34, 0, 0, 0, +50, 0,
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         0, 0, +41, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, -4, 0, 0, 0, 0,
@@ -18,8 +20,9 @@ function FancySL() {
         0, +82, 0, 0, 0, 0, 0, 0, +90, 0,
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         0, -19, 0, 0, 0, 0, -65, 0, 0, 0,
-        0, 0, 0, 0, -37, 0, 0, 0, 0
+        0, 0, 0, 0, -37, 0, 0, 0, 0,0
     ]);
+
     function logBoard() {
         for (let i = 0; i <= 99; i++) {
             if (board[i] < 0) {
@@ -90,10 +93,32 @@ function FancySL() {
 
 
     function gameLoop() {
+        if (winner > -1)
+            return;
 
-        const moves = rollDice();
+        const moves = rollDice();// rolling dice
+
+        if (playerPostions[currentPlayer] + moves > 99) {
+            const newMsg = "Rolled extra(" + moves + "), cannot move ahead";
+            updateMessage(newMsg);
+
+            if (currentPlayer < playerCount - 1)
+                updateCurrentPlayer(currentPlayer + 1);
+            else
+                updateCurrentPlayer(0);
+            return;
+        }
+
+        // moving player if they fulfill valid condition
         const newPlace = movePlayer(currentPlayer, moves);
 
+        if (newPlace == 99) {
+            const newMsg = "Player " + (currentPlayer + 1) + " won the game!";
+            updateMessage(newMsg);
+            setWinner(currentPlayer);
+            return;
+        }
+        
         const newMsg = "Player " + (currentPlayer + 1) + " rolled a " + moves;
         updateMessage(newMsg);
 
