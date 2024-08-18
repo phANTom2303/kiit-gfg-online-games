@@ -3,6 +3,7 @@ import SelectPlayers from "./SelectPlayers/selectPlayer";
 import FancySLTile from "./fancySLtile";
 import './fancySL.css';
 function FancySL() {
+
     const [playerCount, setPlayerCount] = useState(0);
     const [playerPostions, updatePlayerPositions] = useState(Array(6).fill(null));
     const [message, updateMessage] = useState("Waiting for Dice Roll...");
@@ -98,6 +99,7 @@ function FancySL() {
 
         const moves = rollDice();// rolling dice
 
+        // validty check when players are near the end
         if (playerPostions[currentPlayer] + moves > 99) {
             const newMsg = "Rolled extra(" + moves + "), cannot move ahead";
             updateMessage(newMsg);
@@ -118,7 +120,7 @@ function FancySL() {
             setWinner(currentPlayer);
             return;
         }
-        
+
         const newMsg = "Player " + (currentPlayer + 1) + " rolled a " + moves;
         updateMessage(newMsg);
 
@@ -128,6 +130,7 @@ function FancySL() {
         else
             updateCurrentPlayer(0);
 
+        // executing the snake/ladder movement with some delay to help user follow along
         setTimeout(() => jumpPlayer(thisPlayer, newPlace), 500);
     }
 
@@ -148,7 +151,6 @@ function FancySL() {
     else {
         return (
             <div className="fancySL">
-                {/* <button onClick={() => logBoard()}>logBoard</button> */}
                 <div>
                     <span>Current  Player : {currentPlayer + 1} </span>
                     <button onClick={() => gameLoop()}> Roll Dice </button>
