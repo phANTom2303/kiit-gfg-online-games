@@ -1,9 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap');
+
 .fancySL {
     width: fit-content;
     margin: 10px auto;
     padding: 15px;
     color: white;
     font-size: large;
+
+    font-family: "Poppins", sans-serif;
+    /* font-weight: 400; */
+    font-style: normal;
 }
 
 .slboard {
@@ -30,27 +36,32 @@
 }
 
 .fancySL .player {
-    flex-grow: 1;
     box-sizing: border-box;
-    width: 10px;
-    height: 10px;
+    width: 45%;
+    height: 45%;
     border-radius: 10px;
     margin: auto auto;
-    border: 0.1px solid black;
+    border: 1px solid black;
+    font-size: 50%;
+    font-weight: bolder;
+    text-align: center;
+    color: black;
 }
 
 .fancySL .p1 {
-    background-color: red;
+    background-color: rgb(231, 85, 85);
 }
 
 .fancySL .p2 {
-    background-color: green;
+    background-color: rgb(109, 245, 143);
 }
 
 .fancySL .p3 {
-    background-color: blue;
+    background-color: rgb(69, 69, 200);
+    color: white;
 }
 
 .fancySL .p4 {
-    background-color: yellow;
+    background-color: rgb(255, 255, 89);
+
 }

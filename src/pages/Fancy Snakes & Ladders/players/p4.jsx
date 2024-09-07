@@ -1,6 +1,6 @@
 function P4({ tileNum, p4Pos }) {
     if (tileNum == p4Pos)
-        return <div className="player p4"></div>;
+        return <div className="player p4">4</div>;
     else
         return <></>;
 }
