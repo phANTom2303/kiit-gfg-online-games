@@ -12,16 +12,16 @@ function FancySL() {
 
 
     const [board, updateBoard] = useState([
-        0, 0, 0, 0, +34, 0, 0, 0, +50, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, +41, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, -4, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, +85, -6, 0,
-        0, 0, 0, 0, 0, -7, 0, 0, 0, 0,
-        0, +82, 0, 0, 0, 0, 0, 0, +90, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, -19, 0, 0, 0, 0, -65, 0, 0, 0,
-        0, 0, 0, 0, -37, 0, 0, 0, 0,0
+        0, +22, 0, 0, 0, 0, 0, +33, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, +76,
+        0, 0, 0, 0, 0, 0, 0, 0, -8, 0,
+        0, +67, 0, 0, 0, 0, 0, -14, 0, 0,
+        +78, 0, 0, 0, 0, 0, -4, 0, 0, 0,
+        0, 0, -32, 0, 0, 0, 0, 0, 0, 0,
+        0, -36, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, +87, 0, 0, 0, 0, 0, 0,
+        0, +99, 0, 0, +94, -53, 0, 0, 0, 0,
+        0, -69, 0, 0, 0, 0, -24, 0, 0, 0
     ]);
 
     function logBoard() {
@@ -89,11 +89,20 @@ function FancySL() {
             const newPlayerPositions = playerPostions;
             newPlayerPositions[currentPlayer] = jumpTo;
             updatePlayerPositions(newPlayerPositions);
+
+            //Slightly long code for that one ladder that takes you to victory:
+
+            if (jumpTo == 99) {
+                const newMsg = "Player " + (currentPlayer + 1) + " won the game!";
+                updateMessage(newMsg);
+                setWinner(currentPlayer);
+                return;
+            }
         }
     }
 
 
-    function gameLoop() {
+    async function gameLoop() {
         if (winner > -1)
             return;
 
@@ -112,7 +121,7 @@ function FancySL() {
         }
 
         // moving player if they fulfill valid condition
-        const newPlace = movePlayer(currentPlayer, moves);
+        const newPlace = await movePlayer(currentPlayer, moves);
 
         if (newPlace == 99) {
             const newMsg = "Player " + (currentPlayer + 1) + " won the game!";
@@ -139,6 +148,7 @@ function FancySL() {
         updateCurrentPlayer(0);
         updatePlayerPositions(Array(6).fill(null));
         setPlayerCount(0);
+        setWinner(-1);
     }
 
     if (playerCount == 0) {
