@@ -5,13 +5,13 @@ function SelectPlayers({ onSubmit, createPly}) {
 
     function decreasePlayer() {
         if (players == 2)
-            setPlayers(6);
+            setPlayers(4);
         else
             setPlayers(players - 1);
     }
 
     function increasePlayer() {
-        if (players == 6)
+        if (players == 4)
             setPlayers(2);
         else
             setPlayers(players + 1);

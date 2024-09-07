@@ -5,7 +5,7 @@ import './fancySL.css';
 function FancySL() {
 
     const [playerCount, setPlayerCount] = useState(0);
-    const [playerPostions, updatePlayerPositions] = useState(Array(6).fill(null));
+    const [playerPostions, updatePlayerPositions] = useState(Array(4).fill(null));
     const [message, updateMessage] = useState("Waiting for Dice Roll...");
     const [currentPlayer, updateCurrentPlayer] = useState(0);
     const [winner, setWinner] = useState(-1);
@@ -37,27 +37,19 @@ function FancySL() {
     function createPlayers(pCount) {
         switch (pCount) {
             case 1:
-                updatePlayerPositions([0, null, null, null, null, null]);
+                updatePlayerPositions([0, null, null, null]);
                 break;
 
             case 2:
-                updatePlayerPositions([0, 0, null, null, null, null]);
+                updatePlayerPositions([0, 0, null, null]);
                 break;
 
             case 3:
-                updatePlayerPositions([0, 0, 0, null, null, null]);
+                updatePlayerPositions([0, 0, 0, null]);
                 break;
 
             case 4:
-                updatePlayerPositions([0, 0, 0, 0, null, null]);
-                break;
-
-            case 5:
-                updatePlayerPositions([0, 0, 0, 0, 0, null]);
-                break;
-
-            case 6:
-                updatePlayerPositions([0, 0, 0, 0, 0, 0]);
+                updatePlayerPositions([0, 0, 0, 0]);
                 break;
         }
     }
