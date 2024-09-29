@@ -35,6 +35,9 @@
     flex-wrap: wrap;
 }
 
+.fancySL .messageBox {
+    text-wrap: wrap;
+}
 .fancySL .player {
     box-sizing: border-box;
     width: 45%;
@@ -46,6 +49,7 @@
     font-weight: bolder;
     text-align: center;
     color: black;
+    aspect-ratio: 1;
 }
 
 .fancySL .p1 {
@@ -65,3 +69,33 @@
     background-color: rgb(255, 255, 89);
 
 }
+
+.fancySL .diceBox {
+    background-color: white;
+    padding: 8px;
+    display: flex;
+    /* width: max-content; */
+    
+    border-radius: 8px;
+}
+
+.fancySL .diceBox .currentMove {
+    padding: 10px;
+    
+}
+
+.fancySL .diceBox img{
+    height: 25px;
+    width: 25px;
+}
+
+.fancySL .diceBox button{
+    background-color: white;
+    border-radius: 8px;
+}
+
+.fancySL .diceBox .player { 
+    width: 14px;
+    height: 14px;
+}
+
