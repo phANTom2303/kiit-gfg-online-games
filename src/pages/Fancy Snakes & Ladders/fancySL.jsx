@@ -9,6 +9,7 @@ function FancySL() {
   const [playerPostions, updatePlayerPositions] = useState(Array(4).fill(null));
   const [message, updateMessage] = useState("Waiting for Dice Roll...");
   const [currentPlayer, updateCurrentPlayer] = useState(0);
+  const [prevPlayer, updatePrevPlayer] = useState(-1);
   const [winner, setWinner] = useState(-1);
 
   const [board, updateBoard] = useState([
@@ -65,13 +66,6 @@ function FancySL() {
 
   function jumpPlayer(currentPlayer, newPlace) {
     if (board[newPlace] != 0) {
-      let newMsg;
-      if (board[newPlace] < 0) {
-        newMsg = "Player " + (currentPlayer + 1) + "caught a snake";
-      } else {
-        newMsg = "Player " + (currentPlayer + 1) + "got a ladder";
-      }
-      updateMessage(newMsg);
       const jumpTo = Math.abs(board[newPlace]);
       const newPlayerPositions = playerPostions;
       newPlayerPositions[currentPlayer] = jumpTo;
@@ -95,14 +89,15 @@ function FancySL() {
 
     // validty check when players are near the end
     if (playerPostions[currentPlayer] + moves > 99) {
-      const newMsg = "Rolled extra(" + moves + "), cannot move ahead";
+      const newMsg = "Rolled extra(" + moves + ") can't move";
       updateMessage(newMsg);
-
+      // updatePrevPlayer(currentPlayer);
       updateCurrentPlayer((currentPlayer + 1) % playerCount);
       return;
     }
 
     // moving player if they fulfill valid condition
+    const oldPLace = playerPostions[currentPlayer];
     const newPlace = await movePlayer(currentPlayer, moves);
 
     if (newPlace == 99) {
@@ -112,14 +107,31 @@ function FancySL() {
       return;
     }
 
-    const newMsg = "Player " + (currentPlayer + 1) + " rolled a " + moves;
+    const newMsg =
+      "P" +
+      (currentPlayer + 1) +
+      " 🎲 " +
+      moves +
+      " , " +
+      (oldPLace + 1) +
+      " ➡️ " +
+      (newPlace + 1) +
+      " ";
     updateMessage(newMsg);
 
     const thisPlayer = currentPlayer;
+    // updatePrevPlayer(thisPlayer);
     updateCurrentPlayer((currentPlayer + 1) % playerCount);
 
+    let jumpPos;
     // executing the snake/ladder movement with some delay to help user follow along
     setTimeout(() => jumpPlayer(thisPlayer, newPlace), 500);
+    let finalMsg = newMsg;
+
+    if (jumpPos > 0) finalMsg = finalMsg + " 🪜 " + (jumpPos + 1);
+    else if (jumpPos < 0) finalMsg = finalMsg + " 🐍 " + (jumpPos + 1);
+
+    updateMessage(finalMsg);
   }
 
   function resetGame() {
@@ -143,20 +155,12 @@ function FancySL() {
     return (
       <div className="fancySL">
         <div>
-          {/* <div className="messageBox">{message} , Current Player : {currentPlayer + 1} </div> */}
-          <div className="diceBox">
-             {/* <PlayerDisplay currentPlayer = {currentPlayer}/> */}
-             <div className="player p1">1</div>
-             <div className="player p2">2</div>
-             <div className="player p3">3</div>
-             <div className="player p4">4</div>
-            <button onClick={() => gameLoop()}>
-               
-              <img src="../public/images/dice-icon.png" alt="" />
-            </button>
+          <div className="messageBox">
+            <PlayerDisplay curPlayer={prevPlayer} />
+            <div> {message}</div>
           </div>
         </div>
-        {/* <div></div> */}
+
         <div className="slboard">
           <div className="row">
             <FancySLTile tileNumber={99} playerPos={playerPostions} />
@@ -279,9 +283,23 @@ function FancySL() {
             <FancySLTile tileNumber={9} playerPos={playerPostions} />
           </div>
         </div>
-        {/* <ResetButton onClick={} */}
-        
-        <ResetButton src={"../../images/restart icon.png"} alt={"reset"} onClick={() => resetGame()} />
+
+        <div className="bottom-controls">
+          <div className="reset-game-button">
+            <ResetButton
+              src={"../../images/restart icon.png"}
+              alt={"reset"}
+              onClick={() => resetGame()}
+            />
+          </div>
+          <div className="diceBox">
+            <PlayerDisplay curPlayer={currentPlayer} />
+            <button onClick={() => gameLoop()}>
+              <img src="../public/images/dice-icon.png" alt="" />
+            </button>
+          </div>
+        </div>
+
         {/* <button onClick={() => resetGame()}>Reset</button> */}
       </div>
     );

@@ -1,15 +1,15 @@
-import P1 from "./players/p1";
-import P2 from "./players/p2";
-import P3 from "./players/p3";
-import P4 from "./players/p4";
+// player 1 sample div :  <div className="player p1">1</div>;
 
-export default function PlayerDisplay(currentPlayer) {
-  return (
-    <>
-      <P1 tileNum={currentPlayer} p1Pos={0} />
-      <P2 tileNum={currentPlayer} p2Pos={1} />
-      <P3 tileNum={currentPlayer} p3Pos={2} />
-      <P4 tileNum={currentPlayer} p4Pos={3} />
-    </>
-  );
+export default function PlayerDisplay({ curPlayer }) {
+  if (curPlayer == 0) {
+    return <div className="player p1">1</div>;
+  } else if (curPlayer == 1) {
+    return <div className="player p2">2</div>;
+  } else if (curPlayer == 2) {
+    return <div className="player p3">3</div>;
+  } else if (curPlayer == 3) {
+    return <div className="player p4">4</div>;
+  } else {
+    return <></>;
+  }
 }
