@@ -79,10 +79,12 @@ function FancySL() {
         setWinner(currentPlayer);
         return;
       }
+
+      return board[newPlace];
     }
   }
 
-  async function gameLoop() {
+  function gameLoop() {
     if (winner > -1) return;
 
     const moves = rollDice(); // rolling dice
@@ -98,7 +100,8 @@ function FancySL() {
 
     // moving player if they fulfill valid condition
     const oldPLace = playerPostions[currentPlayer];
-    const newPlace = await movePlayer(currentPlayer, moves);
+    const newPlace = movePlayer(currentPlayer, moves);
+    updatePlayerPositions(playerPostions);
 
     if (newPlace == 99) {
       const newMsg = "Player " + (currentPlayer + 1) + " won the game!";
@@ -125,11 +128,12 @@ function FancySL() {
 
     let jumpPos;
     // executing the snake/ladder movement with some delay to help user follow along
-    setTimeout(() => jumpPlayer(thisPlayer, newPlace), 500);
+    jumpPos = jumpPlayer(thisPlayer, newPlace);
+    let absJumpPos = Math.abs(jumpPos);
     let finalMsg = newMsg;
 
-    if (jumpPos > 0) finalMsg = finalMsg + " 🪜 " + (jumpPos + 1);
-    else if (jumpPos < 0) finalMsg = finalMsg + " 🐍 " + (jumpPos + 1);
+    if (jumpPos > 0) finalMsg = finalMsg + " 🪜 " + (absJumpPos + 1);
+    else if (jumpPos < 0) finalMsg = finalMsg + " 🐍 " + (absJumpPos + 1);
 
     updateMessage(finalMsg);
   }
