@@ -10,28 +10,28 @@ function App() {
   if (choice == 1) {
     return (
       <>
-        <Header text={"Tic Tac Toe"} onImgClick={() => setChoice(0)} />
+        <Header text={"Tic Tac Toe"} onImgClick={() => setChoice(0)} backButton={true} />
         <TicTacToe />
       </>
     );
   } else if (choice == 2) {
     return (
       <>
-        <Header text={"Connect 4"} onImgClick={() => setChoice(0)} />
+        <Header text={"Connect 4"} onImgClick={() => setChoice(0)} backButton={true} />
         <Connect4 />
       </>
     );
   } else if (choice == 3) {
     return (
       <>
-        <Header text={"Snakes & Ladders"} onImgClick={() => setChoice(0)} />
+        <Header text={"Snakes & Ladders"} onImgClick={() => setChoice(0)} backButton={true} />
         <FancySL />
       </>
     );
   } else {
     return (
       <>
-        <Header text={"Mini Games"} onImgClick={() => setChoice(0)} />
+        <Header text={"Mini Games"} onImgClick={() => setChoice(0)} backButton={false}/>
         <div className="cardList">
           <GameCard
             onCardClick={() => setChoice(1)}
