@@ -5,14 +5,14 @@ export default function PlayerTile({ tileString }) {
     // only player 4
     return (
       <div className="slbox">
-        <div className="player p4">4</div>
+        <div className="player single-player p4">4</div>
       </div>
     );
   } else if (tileString === 0b0010) {
     // only player 3
     return (
       <div className="slbox">
-        <div className="player p3">3</div>
+        <div className="player single-player p3">3</div>
       </div>
     );
   } else if (tileString === 0b0011) {
@@ -26,7 +26,7 @@ export default function PlayerTile({ tileString }) {
     // only player 2
     return (
       <div className="slbox">
-        <div className="player p2">2</div>
+        <div className="player single-player p2">2</div>
       </div>
     );
   } else if (tileString === 0b0101) {
@@ -55,7 +55,7 @@ export default function PlayerTile({ tileString }) {
     // only player 1
     return (
       <div className="slbox">
-        <div className="player p1">1</div>
+        <div className="player single-player p1">1</div>
       </div>
     );
   } else if (tileString === 0b1001) {
