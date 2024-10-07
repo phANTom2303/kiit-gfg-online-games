@@ -28,6 +28,20 @@ body {
     flex-wrap: wrap;
 }
 
+@keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+
+body *{
+    animation: fadeIn 0.5s ease-in-out;
+}
+
 @media (min-width: 1200px) {
     .cardList>* {
         width: 23%;
