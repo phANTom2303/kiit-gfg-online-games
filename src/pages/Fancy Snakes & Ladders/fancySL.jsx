@@ -82,11 +82,14 @@ function FancySL() {
   }
   //AI generated end
 
-  function movePlayer(player, moves) {
-    const newPos = playerPostions;
-    newPos[player] = newPos[player] + moves;
-    updatePlayerPositions(newPos);
-    placePlayers(newPos);
+  async function movePlayer(player, moves) {
+    let newPos = [...playerPostions];
+    for (let i = 0; i < moves; i++) {
+      await new Promise((resolve) => setTimeout(resolve, 300));
+      newPos[player]++;
+      updatePlayerPositions(newPos);
+      placePlayers(newPos);
+    }
     return newPos[player];
   }
 
@@ -111,10 +114,13 @@ function FancySL() {
     }
   }
 
-  function gameLoop() {
+  async function gameLoop() {
     if (winner > -1) return;
 
     const moves = rollDice(); // rolling dice
+
+    const newMsg = "P" + (currentPlayer + 1) + " 🎲 " + moves;
+    updateMessage(newMsg);
 
     // validty check when players are near the end
     if (playerPostions[currentPlayer] + moves > 99) {
@@ -127,7 +133,7 @@ function FancySL() {
 
     // moving player if they fulfill valid condition
     const oldPLace = playerPostions[currentPlayer];
-    const newPlace = movePlayer(currentPlayer, moves);
+    const newPlace = await movePlayer(currentPlayer, moves);
 
     if (newPlace == 99) {
       const newMsg = "Player " + (currentPlayer + 1) + " won the game!";
@@ -136,7 +142,7 @@ function FancySL() {
       return;
     }
 
-    const newMsg =
+    const newMsg2 =
       "P" +
       (currentPlayer + 1) +
       " 🎲 " +
@@ -146,7 +152,8 @@ function FancySL() {
       " ➡️ " +
       (newPlace + 1) +
       " ";
-    updateMessage(newMsg);
+
+    updateMessage(newMsg2);
 
     const thisPlayer = currentPlayer;
     // updatePrevPlayer(thisPlayer);
@@ -154,9 +161,10 @@ function FancySL() {
 
     let jumpPos;
     // executing the snake/ladder movement with some delay to help user follow along
+    await new Promise((resolve) => setTimeout(resolve, 800));
     jumpPos = jumpPlayer(thisPlayer, newPlace);
     let absJumpPos = Math.abs(jumpPos);
-    let finalMsg = newMsg;
+    let finalMsg = newMsg2;
 
     if (jumpPos > 0) finalMsg = finalMsg + " 🪜 " + (absJumpPos + 1);
     else if (jumpPos < 0) finalMsg = finalMsg + " 🐍 " + (absJumpPos + 1);
