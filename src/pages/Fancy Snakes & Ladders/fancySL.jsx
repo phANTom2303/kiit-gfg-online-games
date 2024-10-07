@@ -1,15 +1,14 @@
 import { useState } from "react";
 import SelectPlayers from "./SelectPlayers/selectPlayer";
-import FancySLTile from "./fancySLtile";
 import PlayerDisplay from "./playerDisplay.jsx";
 import ResetButton from "./resetButton/resetButton.jsx";
+import PlayerTile from "./players/playerTile.jsx";
 import "./fancySL.css";
 function FancySL() {
   const [playerCount, setPlayerCount] = useState(0);
   const [playerPostions, updatePlayerPositions] = useState(Array(4).fill(null));
   const [message, updateMessage] = useState("Waiting for Dice Roll...");
   const [currentPlayer, updateCurrentPlayer] = useState(0);
-  const [prevPlayer, updatePrevPlayer] = useState(-1);
   const [winner, setWinner] = useState(-1);
 
   const [board, updateBoard] = useState([
@@ -20,33 +19,59 @@ function FancySL() {
     0, 0, 0, 0, -24, 0, 0, 0,
   ]);
 
-  function logBoard() {
-    for (let i = 0; i <= 99; i++) {
-      if (board[i] < 0) {
-        console.log(
-          "At postion " + (i + 1) + " snake to " + (Math.abs(board[i]) + 1)
-        );
-      } else if (board[i] > 0) {
-        console.log("At postion " + (i + 1) + " ladder to " + (board[i] + 1));
-      }
+  const [playerBoard, updatePlayerBoard] = useState(Array(100).fill(0b0000));
+
+  // function logBoard() {
+  //   for (let i = 0; i <= 99; i++) {
+  //     if (board[i] < 0) {
+  //       console.log(
+  //         "At postion " + (i + 1) + " snake to " + (Math.abs(board[i]) + 1)
+  //       );
+  //     } else if (board[i] > 0) {
+  //       console.log("At postion " + (i + 1) + " ladder to " + (board[i] + 1));
+  //     }
+  //   }
+  // }
+
+  function placePlayers(curPLayerPositions) {
+    let newBoard = Array(100).fill(0b000);
+    if (curPLayerPositions[0] != null) {
+      newBoard[curPLayerPositions[0]] |= 0b1000;
     }
+
+    if (curPLayerPositions[1] != null) {
+      newBoard[curPLayerPositions[1]] |= 0b0100;
+    }
+
+    if (curPLayerPositions[2] != null) {
+      newBoard[curPLayerPositions[2]] |= 0b0010;
+    }
+
+    if (curPLayerPositions[3] != null) {
+      newBoard[curPLayerPositions[3]] |= 0b0001;
+    }
+    updatePlayerBoard(newBoard);
   }
   function createPlayers(pCount) {
     switch (pCount) {
-      case 1:
+      case 1: //useless condition as minimum player count will always be 2
         updatePlayerPositions([0, null, null, null]);
+        placePlayers([0, null, null, null]);
         break;
 
       case 2:
         updatePlayerPositions([0, 0, null, null]);
+        placePlayers([0, 0, null, null]);
         break;
 
       case 3:
         updatePlayerPositions([0, 0, 0, null]);
+        placePlayers([0, 0, 0, null]);
         break;
 
       case 4:
         updatePlayerPositions([0, 0, 0, 0]);
+        placePlayers([0, 0, 0, 0]);
         break;
     }
   }
@@ -61,6 +86,7 @@ function FancySL() {
     const newPos = playerPostions;
     newPos[player] = newPos[player] + moves;
     updatePlayerPositions(newPos);
+    placePlayers(newPos);
     return newPos[player];
   }
 
@@ -70,6 +96,7 @@ function FancySL() {
       const newPlayerPositions = playerPostions;
       newPlayerPositions[currentPlayer] = jumpTo;
       updatePlayerPositions(newPlayerPositions);
+      placePlayers(newPlayerPositions);
 
       //Slightly long code for that one ladder that takes you to victory:
 
@@ -101,7 +128,6 @@ function FancySL() {
     // moving player if they fulfill valid condition
     const oldPLace = playerPostions[currentPlayer];
     const newPlace = movePlayer(currentPlayer, moves);
-    updatePlayerPositions(playerPostions);
 
     if (newPlace == 99) {
       const newMsg = "Player " + (currentPlayer + 1) + " won the game!";
@@ -160,131 +186,130 @@ function FancySL() {
       <div className="fancySL">
         <div>
           <div className="messageBox">
-            <PlayerDisplay curPlayer={prevPlayer} />
             <div> {message}</div>
           </div>
         </div>
 
         <div className="slboard">
           <div className="row">
-            <FancySLTile tileNumber={99} playerPos={playerPostions} />
-            <FancySLTile tileNumber={98} playerPos={playerPostions} />
-            <FancySLTile tileNumber={97} playerPos={playerPostions} />
-            <FancySLTile tileNumber={96} playerPos={playerPostions} />
-            <FancySLTile tileNumber={95} playerPos={playerPostions} />
-            <FancySLTile tileNumber={94} playerPos={playerPostions} />
-            <FancySLTile tileNumber={93} playerPos={playerPostions} />
-            <FancySLTile tileNumber={92} playerPos={playerPostions} />
-            <FancySLTile tileNumber={91} playerPos={playerPostions} />
-            <FancySLTile tileNumber={90} playerPos={playerPostions} />
+            <PlayerTile tileString={playerBoard[99]} />
+            <PlayerTile tileString={playerBoard[98]} />
+            <PlayerTile tileString={playerBoard[97]} />
+            <PlayerTile tileString={playerBoard[96]} />
+            <PlayerTile tileString={playerBoard[95]} />
+            <PlayerTile tileString={playerBoard[94]} />
+            <PlayerTile tileString={playerBoard[93]} />
+            <PlayerTile tileString={playerBoard[92]} />
+            <PlayerTile tileString={playerBoard[91]} />
+            <PlayerTile tileString={playerBoard[90]} />
           </div>
           <div className="row">
-            <FancySLTile tileNumber={80} playerPos={playerPostions} />
-            <FancySLTile tileNumber={81} playerPos={playerPostions} />
-            <FancySLTile tileNumber={82} playerPos={playerPostions} />
-            <FancySLTile tileNumber={83} playerPos={playerPostions} />
-            <FancySLTile tileNumber={84} playerPos={playerPostions} />
-            <FancySLTile tileNumber={85} playerPos={playerPostions} />
-            <FancySLTile tileNumber={86} playerPos={playerPostions} />
-            <FancySLTile tileNumber={87} playerPos={playerPostions} />
-            <FancySLTile tileNumber={88} playerPos={playerPostions} />
-            <FancySLTile tileNumber={89} playerPos={playerPostions} />
+            <PlayerTile tileString={playerBoard[80]} />
+            <PlayerTile tileString={playerBoard[81]} />
+            <PlayerTile tileString={playerBoard[82]} />
+            <PlayerTile tileString={playerBoard[83]} />
+            <PlayerTile tileString={playerBoard[84]} />
+            <PlayerTile tileString={playerBoard[85]} />
+            <PlayerTile tileString={playerBoard[86]} />
+            <PlayerTile tileString={playerBoard[87]} />
+            <PlayerTile tileString={playerBoard[88]} />
+            <PlayerTile tileString={playerBoard[89]} />
           </div>
           <div className="row">
-            <FancySLTile tileNumber={79} playerPos={playerPostions} />
-            <FancySLTile tileNumber={78} playerPos={playerPostions} />
-            <FancySLTile tileNumber={77} playerPos={playerPostions} />
-            <FancySLTile tileNumber={76} playerPos={playerPostions} />
-            <FancySLTile tileNumber={75} playerPos={playerPostions} />
-            <FancySLTile tileNumber={74} playerPos={playerPostions} />
-            <FancySLTile tileNumber={73} playerPos={playerPostions} />
-            <FancySLTile tileNumber={72} playerPos={playerPostions} />
-            <FancySLTile tileNumber={71} playerPos={playerPostions} />
-            <FancySLTile tileNumber={70} playerPos={playerPostions} />
+            <PlayerTile tileString={playerBoard[79]} />
+            <PlayerTile tileString={playerBoard[78]} />
+            <PlayerTile tileString={playerBoard[77]} />
+            <PlayerTile tileString={playerBoard[76]} />
+            <PlayerTile tileString={playerBoard[75]} />
+            <PlayerTile tileString={playerBoard[74]} />
+            <PlayerTile tileString={playerBoard[73]} />
+            <PlayerTile tileString={playerBoard[72]} />
+            <PlayerTile tileString={playerBoard[71]} />
+            <PlayerTile tileString={playerBoard[70]} />
           </div>
           <div className="row">
-            <FancySLTile tileNumber={60} playerPos={playerPostions} />
-            <FancySLTile tileNumber={61} playerPos={playerPostions} />
-            <FancySLTile tileNumber={62} playerPos={playerPostions} />
-            <FancySLTile tileNumber={63} playerPos={playerPostions} />
-            <FancySLTile tileNumber={64} playerPos={playerPostions} />
-            <FancySLTile tileNumber={65} playerPos={playerPostions} />
-            <FancySLTile tileNumber={66} playerPos={playerPostions} />
-            <FancySLTile tileNumber={67} playerPos={playerPostions} />
-            <FancySLTile tileNumber={68} playerPos={playerPostions} />
-            <FancySLTile tileNumber={69} playerPos={playerPostions} />
+            <PlayerTile tileString={playerBoard[60]} />
+            <PlayerTile tileString={playerBoard[61]} />
+            <PlayerTile tileString={playerBoard[62]} />
+            <PlayerTile tileString={playerBoard[63]} />
+            <PlayerTile tileString={playerBoard[64]} />
+            <PlayerTile tileString={playerBoard[65]} />
+            <PlayerTile tileString={playerBoard[66]} />
+            <PlayerTile tileString={playerBoard[67]} />
+            <PlayerTile tileString={playerBoard[68]} />
+            <PlayerTile tileString={playerBoard[69]} />
           </div>
           <div className="row">
-            <FancySLTile tileNumber={59} playerPos={playerPostions} />
-            <FancySLTile tileNumber={58} playerPos={playerPostions} />
-            <FancySLTile tileNumber={57} playerPos={playerPostions} />
-            <FancySLTile tileNumber={56} playerPos={playerPostions} />
-            <FancySLTile tileNumber={55} playerPos={playerPostions} />
-            <FancySLTile tileNumber={54} playerPos={playerPostions} />
-            <FancySLTile tileNumber={53} playerPos={playerPostions} />
-            <FancySLTile tileNumber={52} playerPos={playerPostions} />
-            <FancySLTile tileNumber={51} playerPos={playerPostions} />
-            <FancySLTile tileNumber={50} playerPos={playerPostions} />
+            <PlayerTile tileString={playerBoard[59]} />
+            <PlayerTile tileString={playerBoard[58]} />
+            <PlayerTile tileString={playerBoard[57]} />
+            <PlayerTile tileString={playerBoard[56]} />
+            <PlayerTile tileString={playerBoard[55]} />
+            <PlayerTile tileString={playerBoard[54]} />
+            <PlayerTile tileString={playerBoard[53]} />
+            <PlayerTile tileString={playerBoard[52]} />
+            <PlayerTile tileString={playerBoard[51]} />
+            <PlayerTile tileString={playerBoard[50]} />
           </div>
           <div className="row">
-            <FancySLTile tileNumber={40} playerPos={playerPostions} />
-            <FancySLTile tileNumber={41} playerPos={playerPostions} />
-            <FancySLTile tileNumber={42} playerPos={playerPostions} />
-            <FancySLTile tileNumber={43} playerPos={playerPostions} />
-            <FancySLTile tileNumber={44} playerPos={playerPostions} />
-            <FancySLTile tileNumber={45} playerPos={playerPostions} />
-            <FancySLTile tileNumber={46} playerPos={playerPostions} />
-            <FancySLTile tileNumber={47} playerPos={playerPostions} />
-            <FancySLTile tileNumber={48} playerPos={playerPostions} />
-            <FancySLTile tileNumber={49} playerPos={playerPostions} />
+            <PlayerTile tileString={playerBoard[40]} />
+            <PlayerTile tileString={playerBoard[41]} />
+            <PlayerTile tileString={playerBoard[42]} />
+            <PlayerTile tileString={playerBoard[43]} />
+            <PlayerTile tileString={playerBoard[44]} />
+            <PlayerTile tileString={playerBoard[45]} />
+            <PlayerTile tileString={playerBoard[46]} />
+            <PlayerTile tileString={playerBoard[47]} />
+            <PlayerTile tileString={playerBoard[48]} />
+            <PlayerTile tileString={playerBoard[49]} />
           </div>
           <div className="row">
-            <FancySLTile tileNumber={39} playerPos={playerPostions} />
-            <FancySLTile tileNumber={38} playerPos={playerPostions} />
-            <FancySLTile tileNumber={37} playerPos={playerPostions} />
-            <FancySLTile tileNumber={36} playerPos={playerPostions} />
-            <FancySLTile tileNumber={35} playerPos={playerPostions} />
-            <FancySLTile tileNumber={34} playerPos={playerPostions} />
-            <FancySLTile tileNumber={33} playerPos={playerPostions} />
-            <FancySLTile tileNumber={32} playerPos={playerPostions} />
-            <FancySLTile tileNumber={31} playerPos={playerPostions} />
-            <FancySLTile tileNumber={30} playerPos={playerPostions} />
+            <PlayerTile tileString={playerBoard[39]} />
+            <PlayerTile tileString={playerBoard[38]} />
+            <PlayerTile tileString={playerBoard[37]} />
+            <PlayerTile tileString={playerBoard[36]} />
+            <PlayerTile tileString={playerBoard[35]} />
+            <PlayerTile tileString={playerBoard[34]} />
+            <PlayerTile tileString={playerBoard[33]} />
+            <PlayerTile tileString={playerBoard[32]} />
+            <PlayerTile tileString={playerBoard[31]} />
+            <PlayerTile tileString={playerBoard[30]} />
           </div>
           <div className="row">
-            <FancySLTile tileNumber={20} playerPos={playerPostions} />
-            <FancySLTile tileNumber={21} playerPos={playerPostions} />
-            <FancySLTile tileNumber={22} playerPos={playerPostions} />
-            <FancySLTile tileNumber={23} playerPos={playerPostions} />
-            <FancySLTile tileNumber={24} playerPos={playerPostions} />
-            <FancySLTile tileNumber={25} playerPos={playerPostions} />
-            <FancySLTile tileNumber={26} playerPos={playerPostions} />
-            <FancySLTile tileNumber={27} playerPos={playerPostions} />
-            <FancySLTile tileNumber={28} playerPos={playerPostions} />
-            <FancySLTile tileNumber={29} playerPos={playerPostions} />
+            <PlayerTile tileString={playerBoard[20]} />
+            <PlayerTile tileString={playerBoard[21]} />
+            <PlayerTile tileString={playerBoard[22]} />
+            <PlayerTile tileString={playerBoard[23]} />
+            <PlayerTile tileString={playerBoard[24]} />
+            <PlayerTile tileString={playerBoard[25]} />
+            <PlayerTile tileString={playerBoard[26]} />
+            <PlayerTile tileString={playerBoard[27]} />
+            <PlayerTile tileString={playerBoard[28]} />
+            <PlayerTile tileString={playerBoard[29]} />
           </div>
           <div className="row">
-            <FancySLTile tileNumber={19} playerPos={playerPostions} />
-            <FancySLTile tileNumber={18} playerPos={playerPostions} />
-            <FancySLTile tileNumber={17} playerPos={playerPostions} />
-            <FancySLTile tileNumber={16} playerPos={playerPostions} />
-            <FancySLTile tileNumber={15} playerPos={playerPostions} />
-            <FancySLTile tileNumber={14} playerPos={playerPostions} />
-            <FancySLTile tileNumber={13} playerPos={playerPostions} />
-            <FancySLTile tileNumber={12} playerPos={playerPostions} />
-            <FancySLTile tileNumber={11} playerPos={playerPostions} />
-            <FancySLTile tileNumber={10} playerPos={playerPostions} />
+            <PlayerTile tileString={playerBoard[19]} />
+            <PlayerTile tileString={playerBoard[18]} />
+            <PlayerTile tileString={playerBoard[17]} />
+            <PlayerTile tileString={playerBoard[16]} />
+            <PlayerTile tileString={playerBoard[15]} />
+            <PlayerTile tileString={playerBoard[14]} />
+            <PlayerTile tileString={playerBoard[13]} />
+            <PlayerTile tileString={playerBoard[12]} />
+            <PlayerTile tileString={playerBoard[11]} />
+            <PlayerTile tileString={playerBoard[10]} />
           </div>
           <div className="row">
-            <FancySLTile tileNumber={0} playerPos={playerPostions} />
-            <FancySLTile tileNumber={1} playerPos={playerPostions} />
-            <FancySLTile tileNumber={2} playerPos={playerPostions} />
-            <FancySLTile tileNumber={3} playerPos={playerPostions} />
-            <FancySLTile tileNumber={4} playerPos={playerPostions} />
-            <FancySLTile tileNumber={5} playerPos={playerPostions} />
-            <FancySLTile tileNumber={6} playerPos={playerPostions} />
-            <FancySLTile tileNumber={7} playerPos={playerPostions} />
-            <FancySLTile tileNumber={8} playerPos={playerPostions} />
-            <FancySLTile tileNumber={9} playerPos={playerPostions} />
+            <PlayerTile tileString={playerBoard[0]} />
+            <PlayerTile tileString={playerBoard[1]} />
+            <PlayerTile tileString={playerBoard[2]} />
+            <PlayerTile tileString={playerBoard[3]} />
+            <PlayerTile tileString={playerBoard[4]} />
+            <PlayerTile tileString={playerBoard[5]} />
+            <PlayerTile tileString={playerBoard[6]} />
+            <PlayerTile tileString={playerBoard[7]} />
+            <PlayerTile tileString={playerBoard[8]} />
+            <PlayerTile tileString={playerBoard[9]} />
           </div>
         </div>
 
