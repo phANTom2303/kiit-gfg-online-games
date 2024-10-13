@@ -2,7 +2,7 @@ import TicTacToe from "./pages/tictactoe/tictactoe";
 import Header from "./components/header/header";
 import GameCard from "./components/gameCard/GameCard";
 import Connect4 from "./pages/connect4/connect4";
-import FancySL from "./pages/Fancy Snakes & Ladders/fancySL";
+import FancySL from "./pages/Snakes & Ladders/fancySL";
 import { useState } from "react";
 function App() {
   const [choice, setChoice] = useState(0);
