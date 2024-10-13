@@ -77,8 +77,13 @@ function FancySL() {
   }
 
   //AI generated start
-  function rollDice() {
-    return Math.floor(Math.random() * 6) + 1;
+  async function rollDice() {
+    updateMessage("Rolling Dice...");
+    await new Promise((resolve) => setTimeout(resolve, 300));
+    const result = Math.floor(Math.random() * 6) + 1;
+    const diceImageElement = document.getElementById("dice-img");
+    diceImageElement.src = `../../public/dice-icons/${result}.png`;  
+    return result;
   }
   //AI generated end
 
@@ -117,7 +122,7 @@ function FancySL() {
   async function gameLoop() {
     if (winner > -1) return;
 
-    const moves = rollDice(); // rolling dice
+    const moves = await rollDice(); // rolling dice
 
     const newMsg = "P" + (currentPlayer + 1) + " 🎲 " + moves;
     updateMessage(newMsg);
@@ -332,7 +337,7 @@ function FancySL() {
           <div className="diceBox">
             <PlayerDisplay curPlayer={currentPlayer} />
             <button onClick={() => gameLoop()}>
-              <img src="../public/images/dice-icon.png" alt="" />
+              <img src="../public/images/dice-icon.png" alt="" id="dice-img" />
             </button>
           </div>
         </div>
