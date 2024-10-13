@@ -3,8 +3,8 @@
     border: none;
     box-sizing: border-box;
     background-color:hsla(224, 81%, 47%, 0.997);
-    width: calc(35px + 1.4vw);
-    height: auto;
+    width:auto;
+    height: 60px;
     border-radius: 200px;
     margin: 15px auto;
 
