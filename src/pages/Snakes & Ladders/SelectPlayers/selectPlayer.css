@@ -30,9 +30,13 @@
     font-style: normal;
     background-color:#1B1A55;
     color: white;
-
+    cursor: pointer;
 }
 
+.selectPlayer button:hover{
+    transition: transform 0.1s ease-in-out;
+    transform: scale(1.1);
+}
 #increasePlayer {
     background-color: #24B04F;
     color: black;
