@@ -19,6 +19,10 @@
   cursor: pointer;
 }
 
+.header img:hover {
+  transform: scale(1.1);
+}
+
 .header ul {
   margin-left: auto;
   margin-right: 20px;

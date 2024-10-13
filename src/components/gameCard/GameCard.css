@@ -16,7 +16,10 @@
     font-weight: 400;
     font-style: normal;
     cursor: pointer;
+    
+    font-size: calc(10px + 0.3vw);
 }
+
 
 .gameCard:hover {
     border: 2px solid white;
