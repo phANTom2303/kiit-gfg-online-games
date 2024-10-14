@@ -13,7 +13,7 @@
 }
 
 .slboard {
-  background-image: url("../../public/images/snake-and-ladders-board.png");
+  background-image: url("../../images/snake-and-ladders-board.png");
   background-size: cover;
   background-repeat: no-repeat;
   margin: 10px auto;

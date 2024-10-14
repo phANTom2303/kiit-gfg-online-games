@@ -33,6 +33,12 @@ function FancySL() {
   //   }
   // }
 
+  function pieceSound() {
+    const sound = new Audio();
+    sound.src = "../../sound-effects/piece-sound.mp3";
+    sound.play();
+  }
+
   function placePlayers(curPLayerPositions) {
     let newBoard = Array(100).fill(0b000);
     if (curPLayerPositions[0] != null) {
@@ -82,7 +88,7 @@ function FancySL() {
     await new Promise((resolve) => setTimeout(resolve, 300));
     const result = Math.floor(Math.random() * 6) + 1;
     const diceImageElement = document.getElementById("dice-img");
-    diceImageElement.src = `../../public/dice-icons/${result}.png`;  
+    diceImageElement.src = `../../dice-icons/${result}.png`;
     return result;
   }
   //AI generated end
@@ -94,6 +100,7 @@ function FancySL() {
       newPos[player]++;
       updatePlayerPositions(newPos);
       placePlayers(newPos);
+      pieceSound();
     }
     return newPos[player];
   }
@@ -337,7 +344,7 @@ function FancySL() {
           <div className="diceBox">
             <PlayerDisplay curPlayer={currentPlayer} />
             <button onClick={() => gameLoop()}>
-              <img src="../public/images/dice-icon.png" alt="" id="dice-img" />
+              <img src="../images/dice-icon.png" alt="" id="dice-img" />
             </button>
           </div>
         </div>
