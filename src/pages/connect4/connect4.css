@@ -47,18 +47,22 @@
 }
 
 .connect4 .column:hover {
+  transition: border 0.1s ease-in-out, background-color 0.1s ease-in-out;
   border: 2px solid white;
   background-color: white;
 
   .tile {
+    transition: background-color 0.1s ease-in-out;
     background-color: #1b1a55;
   }
 
   .red {
+    transition: background-color 0.1s ease-in-out;
     background-color: red;
   }
 
   .yellow {
+    transition: background-color 0.1s ease-in-out;
     background-color: yellow;
   }
 }
@@ -95,6 +99,7 @@
   }
 }
 
-.connect4 .prompt-box, .connect4 .c4board * {
+.connect4 .prompt-box,
+.connect4 .c4board * {
   animation: fadeIn 0.5s ease-in-out;
 }
