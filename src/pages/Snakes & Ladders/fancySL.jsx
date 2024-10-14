@@ -39,6 +39,20 @@ function FancySL() {
     sound.play();
   }
 
+  function ladderSound() {
+    const sound = new Audio();
+    sound.src = "../../sound-effects/ladder_sound.wav";
+    sound.volume = 0.1;
+    sound.play();
+  }
+
+  function snakeSound() {
+    const sound = new Audio();
+    sound.src = "../../sound-effects/snake_sound.mp3";
+    sound.volume = 0.05;
+    sound.play();
+  }
+
   function placePlayers(curPLayerPositions) {
     let newBoard = Array(100).fill(0b000);
     if (curPLayerPositions[0] != null) {
@@ -107,7 +121,13 @@ function FancySL() {
 
   function jumpPlayer(currentPlayer, newPlace) {
     if (board[newPlace] != 0) {
-      const jumpTo = Math.abs(board[newPlace]);
+      const whereTo = board[newPlace];
+      if (whereTo > 0) {
+        ladderSound();
+      } else {
+        snakeSound();
+      }
+      const jumpTo = Math.abs(whereTo);
       const newPlayerPositions = playerPostions;
       newPlayerPositions[currentPlayer] = jumpTo;
       updatePlayerPositions(newPlayerPositions);
