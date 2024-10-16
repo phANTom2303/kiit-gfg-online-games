@@ -11,6 +11,7 @@ export default function FancySL() {
   const [currentPlayer, updateCurrentPlayer] = useState(0);
   const [winner, setWinner] = useState(-1);
   const [soundStatus, setSoundStatus] = useState(true);
+  const [isRolling, setIsRolling] = useState(false);
   const [board, updateBoard] = useState([
     0, +22, 0, 0, 0, 0, 0, +33, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, +76, 0, 0, 0,
     0, 0, 0, 0, 0, -8, 0, 0, +67, 0, 0, 0, 0, 0, -14, 0, 0, +78, 0, 0, 0, 0, 0,
@@ -192,7 +193,6 @@ export default function FancySL() {
     updateMessage(newMsg2);
 
     const thisPlayer = currentPlayer;
-    // updatePrevPlayer(thisPlayer);
     updateCurrentPlayer((currentPlayer + 1) % playerCount);
 
     let jumpPos;
@@ -214,6 +214,13 @@ export default function FancySL() {
     updatePlayerPositions(Array(6).fill(null));
     setPlayerCount(0);
     setWinner(-1);
+  }
+
+  async function callGameLoop() {
+    if (isRolling) return;
+    setIsRolling(true);
+    await gameLoop();
+    setIsRolling(false);
   }
 
   if (playerCount == 0) {
@@ -367,7 +374,7 @@ export default function FancySL() {
           </div>
           <div className="diceBox">
             <PlayerDisplay curPlayer={currentPlayer} />
-            <button onClick={() => gameLoop()}>
+            <button onClick={() => callGameLoop()}>
               <img src="../images/dice-icon.png" alt="" id="dice-img" />
             </button>
           </div>
