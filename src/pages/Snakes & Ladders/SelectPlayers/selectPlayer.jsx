@@ -1,27 +1,23 @@
 import { useState } from "react";
+import playSoundOf from "../soundHandler";
 import "./selectPlayer.css";
 function SelectPlayers({ onSubmit, createPly }) {
   const [players, setPlayers] = useState(2);
-  function buttonSound() {
-    const sound = new Audio();
-    sound.src = "../../../sound-effects/switch-button.mp3";
-    sound.volume = 0.1;
-    sound.play();
-  }
+
   function decreasePlayer() {
-    buttonSound();
+    playSoundOf("button", true);
     if (players == 2) setPlayers(4);
     else setPlayers(players - 1);
   }
 
   function increasePlayer() {
-    buttonSound();
+    playSoundOf("button", true);
     if (players == 4) setPlayers(2);
     else setPlayers(players + 1);
   }
 
   function onSubmitClicked() {
-    buttonSound();
+    playSoundOf("button", true);
     onSubmit(players);
     createPly(players);
   }

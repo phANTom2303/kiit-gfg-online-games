@@ -3,6 +3,7 @@ import SelectPlayers from "./SelectPlayers/selectPlayer";
 import PlayerDisplay from "./playerDisplay.jsx";
 import ResetButton from "./resetButton/resetButton.jsx";
 import PlayerTile from "./players/playerTile.jsx";
+import playSoundOf from "./soundHandler.js";
 import "./fancySL.css";
 export default function FancySL() {
   const [playerCount, setPlayerCount] = useState(0);
@@ -33,26 +34,6 @@ export default function FancySL() {
   //     }
   //   }
   // }
-
-  function pieceSound() {
-    const sound = new Audio();
-    sound.src = "../../sound-effects/piece-sound.mp3";
-    sound.play();
-  }
-
-  function ladderSound() {
-    const sound = new Audio();
-    sound.src = "../../sound-effects/ladder_sound.wav";
-    sound.volume = 0.1;
-    sound.play();
-  }
-
-  function snakeSound() {
-    const sound = new Audio();
-    sound.src = "../../sound-effects/snake_sound.mp3";
-    sound.volume = 0.05;
-    sound.play();
-  }
 
   function placePlayers(curPLayerPositions) {
     let newBoard = Array(100).fill(0b000);
@@ -115,9 +96,7 @@ export default function FancySL() {
       newPos[player]++;
       updatePlayerPositions(newPos);
       placePlayers(newPos);
-      if (soundStatus) {
-        pieceSound();
-      }
+      playSoundOf("piece", soundStatus);
     }
     return newPos[player];
   }
@@ -125,12 +104,10 @@ export default function FancySL() {
   function jumpPlayer(currentPlayer, newPlace) {
     if (board[newPlace] != 0) {
       const whereTo = board[newPlace];
-      if (soundStatus) {
-        if (whereTo > 0) {
-          ladderSound();
-        } else {
-          snakeSound();
-        }
+      if (whereTo > 0) {
+        playSoundOf("ladder", soundStatus);
+      } else {
+        playSoundOf("snake", soundStatus);
       }
       const jumpTo = Math.abs(whereTo);
       const newPlayerPositions = playerPostions;
