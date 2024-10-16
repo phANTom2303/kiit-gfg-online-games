@@ -4,13 +4,13 @@ import PlayerDisplay from "./playerDisplay.jsx";
 import ResetButton from "./resetButton/resetButton.jsx";
 import PlayerTile from "./players/playerTile.jsx";
 import "./fancySL.css";
-function FancySL() {
+export default function FancySL() {
   const [playerCount, setPlayerCount] = useState(0);
   const [playerPostions, updatePlayerPositions] = useState(Array(4).fill(null));
   const [message, updateMessage] = useState("Waiting for Dice Roll...");
   const [currentPlayer, updateCurrentPlayer] = useState(0);
   const [winner, setWinner] = useState(-1);
-
+  const [soundStatus, setSoundStatus] = useState(true);
   const [board, updateBoard] = useState([
     0, +22, 0, 0, 0, 0, 0, +33, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, +76, 0, 0, 0,
     0, 0, 0, 0, 0, -8, 0, 0, +67, 0, 0, 0, 0, 0, -14, 0, 0, +78, 0, 0, 0, 0, 0,
@@ -114,7 +114,9 @@ function FancySL() {
       newPos[player]++;
       updatePlayerPositions(newPos);
       placePlayers(newPos);
-      pieceSound();
+      if (soundStatus) {
+        pieceSound();
+      }
     }
     return newPos[player];
   }
@@ -122,10 +124,12 @@ function FancySL() {
   function jumpPlayer(currentPlayer, newPlace) {
     if (board[newPlace] != 0) {
       const whereTo = board[newPlace];
-      if (whereTo > 0) {
-        ladderSound();
-      } else {
-        snakeSound();
+      if (soundStatus) {
+        if (whereTo > 0) {
+          ladderSound();
+        } else {
+          snakeSound();
+        }
       }
       const jumpTo = Math.abs(whereTo);
       const newPlayerPositions = playerPostions;
@@ -368,10 +372,7 @@ function FancySL() {
             </button>
           </div>
         </div>
-
-        {/* <button onClick={() => resetGame()}>Reset</button> */}
       </div>
     );
   }
 }
-export default FancySL;

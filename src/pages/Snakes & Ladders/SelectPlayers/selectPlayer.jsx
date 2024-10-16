@@ -1,37 +1,48 @@
 import { useState } from "react";
-import './selectPlayer.css'
-function SelectPlayers({ onSubmit, createPly}) {
-    const [players, setPlayers] = useState(2);
+import "./selectPlayer.css";
+function SelectPlayers({ onSubmit, createPly }) {
+  const [players, setPlayers] = useState(2);
+  function buttonSound() {
+    const sound = new Audio();
+    sound.src = "../../../sound-effects/switch-button.mp3";
+    sound.volume = 0.1;
+    sound.play();
+  }
+  function decreasePlayer() {
+    buttonSound();
+    if (players == 2) setPlayers(4);
+    else setPlayers(players - 1);
+  }
 
-    function decreasePlayer() {
-        if (players == 2)
-            setPlayers(4);
-        else
-            setPlayers(players - 1);
-    }
+  function increasePlayer() {
+    buttonSound();
+    if (players == 4) setPlayers(2);
+    else setPlayers(players + 1);
+  }
 
-    function increasePlayer() {
-        if (players == 4)
-            setPlayers(2);
-        else
-            setPlayers(players + 1);
-    }
+  function onSubmitClicked() {
+    buttonSound();
+    onSubmit(players);
+    createPly(players);
+  }
 
-    function onSubmitClicked(){
-        onSubmit(players);
-        createPly(players);
-    }
-
-    return (
-        <div className="selectPlayer">
-            <p> Select Number of Players :</p>
-            <div className="playerCounter">
-                <button  id="decreasePlayer" onClick={() => decreasePlayer()}> -1 </button>
-                <div>{players}</div>
-                <button  id="increasePlayer" onClick={() => increasePlayer()}>+1</button>
-            </div>
-            <button id="submitPlayers" onClick={() => onSubmitClicked()}>Submit</button>
-        </div>
-    );
+  return (
+    <div className="selectPlayer">
+      <p> Select Number of Players :</p>
+      <div className="playerCounter">
+        <button id="decreasePlayer" onClick={() => decreasePlayer()}>
+          {" "}
+          -1{" "}
+        </button>
+        <div>{players}</div>
+        <button id="increasePlayer" onClick={() => increasePlayer()}>
+          +1
+        </button>
+      </div>
+      <button id="submitPlayers" onClick={() => onSubmitClicked()}>
+        Submit
+      </button>
+    </div>
+  );
 }
 export default SelectPlayers;
