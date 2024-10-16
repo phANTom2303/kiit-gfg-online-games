@@ -81,6 +81,7 @@ export default function FancySL() {
   //AI generated start
   async function rollDice() {
     updateMessage("Rolling Dice...");
+    playSoundOf("button", soundStatus);
     await new Promise((resolve) => setTimeout(resolve, 300));
     const result = Math.floor(Math.random() * 6) + 1;
     const diceImageElement = document.getElementById("dice-img");
@@ -185,12 +186,14 @@ export default function FancySL() {
     updateMessage(finalMsg);
   }
 
-  function resetGame() {
+  async function resetGame() {
     updateMessage("Waiting for Dice Roll...");
     updateCurrentPlayer(0);
     updatePlayerPositions(Array(6).fill(null));
-    setPlayerCount(0);
+    updatePlayerBoard(Array(100).fill(0b000));
     setWinner(-1);
+    playSoundOf("button", soundStatus);
+    setPlayerCount(0);
   }
 
   async function callGameLoop() {
