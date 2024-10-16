@@ -40,13 +40,7 @@ body {
   animation: fadeIn 0.5s ease-in-out;
 }
 
-@media (min-width: 1200px) {
-  .cardList > * {
-    width: 23%;
-  }
-}
-
-@media (min-width: 900px) and (max-width: 1200px) {
+@media (min-width: 900px)  {
   .cardList > * {
     width: 30%;
   }
