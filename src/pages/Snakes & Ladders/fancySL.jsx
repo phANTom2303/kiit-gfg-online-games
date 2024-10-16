@@ -81,8 +81,8 @@ export default function FancySL() {
   //AI generated start
   async function rollDice() {
     updateMessage("Rolling Dice...");
-    playSoundOf("button", soundStatus);
     await new Promise((resolve) => setTimeout(resolve, 300));
+    playSoundOf("button", soundStatus);
     const result = Math.floor(Math.random() * 6) + 1;
     const diceImageElement = document.getElementById("dice-img");
     diceImageElement.src = `../../dice-icons/${result}.png`;
@@ -102,8 +102,10 @@ export default function FancySL() {
     return newPos[player];
   }
 
-  function jumpPlayer(currentPlayer, newPlace) {
+  async function jumpPlayer(currentPlayer, newPlace) {
     if (board[newPlace] != 0) {
+      // executing the snake/ladder movement with some delay to help user follow along
+      await new Promise((resolve) => setTimeout(resolve, 800));
       const whereTo = board[newPlace];
       if (whereTo > 0) {
         playSoundOf("ladder", soundStatus);
@@ -174,9 +176,7 @@ export default function FancySL() {
     updateCurrentPlayer((currentPlayer + 1) % playerCount);
 
     let jumpPos;
-    // executing the snake/ladder movement with some delay to help user follow along
-    await new Promise((resolve) => setTimeout(resolve, 800));
-    jumpPos = jumpPlayer(thisPlayer, newPlace);
+    jumpPos = await jumpPlayer(thisPlayer, newPlace);
     let absJumpPos = Math.abs(jumpPos);
     let finalMsg = newMsg2;
 
