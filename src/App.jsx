@@ -3,6 +3,7 @@ import Header from "./components/header/header";
 import GameCard from "./components/gameCard/GameCard";
 import Connect4 from "./pages/connect4/connect4";
 import ChainReaction from "./pages/chain-reaction/ChainReaction";
+import Hangman from "./pages/hangman/Main";
 import { useState } from "react";
 function App() {
   const [choice, setChoice] = useState(0);
@@ -23,9 +24,16 @@ function App() {
     );
   } else if (choice == 3) {
     return (
-      <div className="min-h-screen bg-[url('/images/background.png')] bg-repeat bg-contain bg-center  ">
+      <div className="min-h-screen bg-[url('/images/background.png')] bg-repeat bg-contain bg-center">
         <Header text={"Chain Reaction"} onImgClick={() => setChoice(0)} />
         <ChainReaction />
+      </div>
+    );
+  } else if (choice == 4) {
+    return (
+      <div className="min-h-screen bg-[url('/images/background.png')] bg-repeat bg-contain bg-center">
+        <Header text={"Hangman"} onImgClick={() => setChoice(0)} />
+        <Hangman />
       </div>
     );
   } else {
@@ -53,6 +61,12 @@ function App() {
             imgPath={"../../images/banners/chain-reaction.png"}
             playerCount={4}
             gameDuration={"15 min."}
+          />
+          <GameCard
+            onCardClick={() => setChoice(4)}
+            gameName={"Hangman"}
+            imgPath={"../../images/banners/hang.webp"}
+            playerCount={1}
           />
           <GameCard
             gameName={"Battleship"}
