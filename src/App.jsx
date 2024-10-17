@@ -3,34 +3,42 @@ import Header from "./components/header/header";
 import GameCard from "./components/gameCard/GameCard";
 import Connect4 from "./pages/connect4/connect4";
 import ChainReaction from "./pages/chain-reaction/ChainReaction";
+import Hangman from "./pages/hangman/Main";
 import { useState } from "react";
 function App() {
   const [choice, setChoice] = useState(0);
 
   if (choice == 1) {
     return (
-      <div className="min-h-screen bg-[url('/images/background.png')] bg-repeat bg-contain bg-center">
+      <>
         <Header text={"Tic Tac Toe"} onImgClick={() => setChoice(0)} />
         <TicTacToe />
-      </div>
+      </>
     );
   } else if (choice == 2) {
     return (
-      <div className="min-h-screen bg-[url('/images/background.png')] bg-repeat bg-contain bg-center">
+      <>
         <Header text={"Connect 4"} onImgClick={() => setChoice(0)} />
         <Connect4 />
-      </div>
+      </>
     );
   } else if (choice == 3) {
     return (
-      <div className="min-h-screen bg-[url('/images/background.png')] bg-repeat bg-contain bg-center  ">
+      <>
         <Header text={"Chain Reaction"} onImgClick={() => setChoice(0)} />
         <ChainReaction />
-      </div>
+      </>
+    );
+  } else if (choice == 4) {
+    return (
+      <>
+        <Header text={"Hangman"} onImgClick={() => setChoice(0)} />
+        <Hangman />
+      </>
     );
   } else {
     return (
-      <div className="min-h-screen bg-[url('/images/background.png')] bg-repeat bg-contain bg-center">
+      <>
         <Header text={"Mini Games"} onImgClick={() => setChoice(0)} />
         <div className="cardList">
           <GameCard
@@ -53,6 +61,12 @@ function App() {
             imgPath={"../../images/banners/chain-reaction.png"}
             playerCount={4}
             gameDuration={"15 min."}
+          />
+          <GameCard
+            onCardClick={() => setChoice(4)}
+            gameName={"Hangman"}
+            imgPath={"../../images/banners/hang.webp"}
+            playerCount={1}
           />
           <GameCard
             gameName={"Battleship"}
@@ -117,7 +131,7 @@ function App() {
             gameDuration={"5 min."}
           />
         </div>
-      </div>
+      </>
     );
   }
 }
