@@ -17,7 +17,8 @@ function App() {
     );
   } else if (choice == 2) {
     return (
-      <div className="min-h-screen bg-[url('/images/background.png')] bg-repeat bg-contain bg-center">        <Header text={"Connect 4"} onImgClick={() => setChoice(0)} />
+      <div className="min-h-screen bg-[url('/images/background.png')] bg-repeat bg-contain bg-center">
+        <Header text={"Connect 4"} onImgClick={() => setChoice(0)} />
         <Connect4 />
       </div>
     );
