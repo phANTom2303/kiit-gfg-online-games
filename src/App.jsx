@@ -6,7 +6,7 @@ import FancySL from "./pages/Snakes & Ladders/fancySL";
 import { useState } from "react";
 function App() {
   const [choice, setChoice] = useState(0);
-
+  const [soundStatus, updateSoundStatus] = useState(true);
   if (choice == 1) {
     return (
       <>
@@ -24,8 +24,8 @@ function App() {
   } else if (choice == 3) {
     return (
       <>
-        <Header text={"Snakes & Ladders"} onImgClick={() => setChoice(0)} backButton={true} />
-        <FancySL />
+        <Header text={"Snakes & Ladders"} onImgClick={() => setChoice(0)} backButton={true} soundStatus={soundStatus} updateSoundStatus={updateSoundStatus}/>
+        <FancySL soundStatus={soundStatus}/>
       </>
     );
   } else {

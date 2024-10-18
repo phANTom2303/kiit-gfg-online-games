@@ -5,13 +5,12 @@ import ResetButton from "./resetButton/resetButton.jsx";
 import PlayerTile from "./players/playerTile.jsx";
 import playSoundOf from "./soundHandler.js";
 import "./fancySL.css";
-export default function FancySL() {
+export default function FancySL({soundStatus}) {
   const [playerCount, setPlayerCount] = useState(0);
   const [playerPostions, updatePlayerPositions] = useState(Array(4).fill(null));
   const [message, updateMessage] = useState("Waiting for Dice Roll...");
   const [currentPlayer, updateCurrentPlayer] = useState(0);
   const [winner, setWinner] = useState(-1);
-  const [soundStatus, setSoundStatus] = useState(true);
   const [isRolling, setIsRolling] = useState(false);
   const [board, updateBoard] = useState([
     0, +22, 0, 0, 0, 0, 0, +33, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, +76, 0, 0, 0,
