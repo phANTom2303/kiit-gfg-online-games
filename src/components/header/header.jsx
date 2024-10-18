@@ -1,9 +1,15 @@
-import styles from "./header.module.css";
+import "./header.css";
 import MuteButton from "../muteButton";
-function Header({ text, onImgClick, backButton, soundStatus, updateSoundStatus}) {
+function Header({
+  text,
+  onImgClick,
+  backButton,
+  soundStatus,
+  updateSoundStatus,
+}) {
   if (backButton) {
     return (
-      <div className={styles.header}>
+      <div className="header">
         <img
           src="../../images/online game logo.png"
           alt=""
@@ -11,46 +17,52 @@ function Header({ text, onImgClick, backButton, soundStatus, updateSoundStatus})
         />
         <h1 className="title">{text}</h1>
         <ul>
-          <li
-            style={{ cursor: "pointer", textDecoration: "underline" }}
-            onClick={onImgClick}
-          >
+          <li style={{ cursor: "pointer" }} onClick={onImgClick}>
             <img
               src="../../header-icons/back-arrow.png"
               style={{ height: "3vw", width: "3vw" }}
               alt="Go Back"
+              className="header-icon"
             />
           </li>
-          <li style={{ cursor: "pointer", textDecoration: "underline" }}>
+
+          <li
+            style={{ cursor: "pointer" }}
+            onClick={() => updateSoundStatus(!soundStatus)}
+          >
+            <MuteButton soundStatus={soundStatus} className="header-icon" />
+          </li>
+
+          {/* <li style={{ cursor: "pointer" }}>
             <img
               src="../../header-icons/info-icon.png"
               style={{ height: "3vw", width: "3vw" }}
               alt="About"
+              className="header-icon"
             />
-          </li>
-          <li style={{ cursor: "pointer", textDecoration: "underline" }} onClick={() => updateSoundStatus(!soundStatus)}>
-            <MuteButton soundStatus={soundStatus} />
-          </li>
+          </li> */}
         </ul>
       </div>
     );
   } else {
     return (
-      <div className={styles.header}>
+      <div className="header">
         <img
           src="../../images/online game logo.png"
           alt=""
           onClick={onImgClick}
+          className="header-icon"
         />
         <h1 className="title">{text}</h1>
         <ul>
-          <li style={{ cursor: "pointer", textDecoration: "underline" }}>
+          {/* <li style={{ cursor: "pointer", textDecoration: "underline" }}>
             <img
               src="../../header-icons/info-icon.png"
               style={{ height: "3vw", width: "3vw" }}
               alt="About"
+              className="header-icon"
             />
-          </li>
+          </li> */}
         </ul>
       </div>
     );
