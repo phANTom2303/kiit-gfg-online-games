@@ -28,7 +28,7 @@ function Main() {
   };
 
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col h-full">
       
       <main className="flex-grow flex flex-col sm:flex-row">
         <ContentGraphics

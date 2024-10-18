@@ -1,7 +1,7 @@
 import React from 'react';
 
 export const Footer = ({ reset }) => (
-  <footer className="bg-blue-950 p-2 text-center">
+  <footer className="bg-transparent p-2 text-center mb-[22px]">
     <div className="flex justify-center items-center">
       <button
         onClick={reset}
