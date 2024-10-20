@@ -3,9 +3,9 @@ import SelectPlayers from "./SelectPlayers/selectPlayer";
 import PlayerDisplay from "./playerDisplay.jsx";
 import ResetButton from "./resetButton/resetButton.jsx";
 import PlayerTile from "./players/playerTile.jsx";
-import playSoundOf from "./soundHandler.js";
+import playSoundOf from "../../components/soundHandler.js";
 import "./fancySL.css";
-export default function FancySL({soundStatus}) {
+export default function FancySL({ soundStatus }) {
   const [playerCount, setPlayerCount] = useState(0);
   const [playerPostions, updatePlayerPositions] = useState(Array(4).fill(null));
   const [message, updateMessage] = useState("Waiting for Dice Roll...");
@@ -81,7 +81,7 @@ export default function FancySL({soundStatus}) {
   async function rollDice() {
     updateMessage("Rolling Dice...");
     await new Promise((resolve) => setTimeout(resolve, 300));
-    playSoundOf("button", soundStatus);
+    playSoundOf("spacebar", soundStatus);
     const result = Math.floor(Math.random() * 6) + 1;
     const diceImageElement = document.getElementById("dice-img");
     diceImageElement.src = `../../dice-icons/${result}.png`;
@@ -155,6 +155,7 @@ export default function FancySL({soundStatus}) {
       const newMsg = "Player " + (currentPlayer + 1) + " won the game!";
       updateMessage(newMsg);
       setWinner(currentPlayer);
+      playSoundOf("game-win", soundStatus);
       return;
     }
 

@@ -3,52 +3,80 @@ import Header from "./components/header/header";
 import GameCard from "./components/gameCard/GameCard";
 import Connect4 from "./pages/connect4/connect4";
 import FancySL from "./pages/Snakes & Ladders/fancySL";
+import playSoundOf from "./components/soundHandler";
 import { useState } from "react";
 function App() {
   const [choice, setChoice] = useState(0);
   const [soundStatus, updateSoundStatus] = useState(true);
+
+  function updateChoice(choice) {
+    playSoundOf("game-start", soundStatus);
+    setChoice(choice);
+  }
   if (choice == 1) {
     return (
       <>
-        <Header text={"Tic Tac Toe"} onImgClick={() => setChoice(0)} backButton={true} />
-        <TicTacToe />
+        <Header
+          text={"Tic Tac Toe"}
+          onImgClick={() => setChoice(0)}
+          backButton={true}
+          soundStatus={soundStatus}
+          updateSoundStatus={updateSoundStatus}
+        />
+        <TicTacToe soundStatus={soundStatus} />
       </>
     );
   } else if (choice == 2) {
     return (
       <>
-        <Header text={"Connect 4"} onImgClick={() => setChoice(0)} backButton={true} />
-        <Connect4 />
+        <Header
+          text={"Connect 4"}
+          onImgClick={() => setChoice(0)}
+          backButton={true}
+          soundStatus={soundStatus}
+          updateSoundStatus={updateSoundStatus}
+        />
+        <Connect4 soundStatus={soundStatus} />
       </>
     );
   } else if (choice == 3) {
     return (
       <>
-        <Header text={"Snakes & Ladders"} onImgClick={() => setChoice(0)} backButton={true} soundStatus={soundStatus} updateSoundStatus={updateSoundStatus}/>
-        <FancySL soundStatus={soundStatus}/>
+        <Header
+          text={"Snakes & Ladders"}
+          onImgClick={() => setChoice(0)}
+          backButton={true}
+          soundStatus={soundStatus}
+          updateSoundStatus={updateSoundStatus}
+        />
+        <FancySL soundStatus={soundStatus} />
       </>
     );
   } else {
     return (
       <>
-        <Header text={"Mini Games"} onImgClick={() => setChoice(0)} backButton={false}/>
+        <Header
+          text={"Mini Games"}
+          onImgClick={() => setChoice(0)}
+          backButton={false}
+        />
         <div className="cardList">
           <GameCard
-            onCardClick={() => setChoice(1)}
+            onCardClick={() => updateChoice(1)}
             imgPath={"../../images/banners/tictactoe-banner.png"}
             gameName={"Tic Tac Toe"}
             playerCount={2}
             gameDuration={"1 min."}
           />
           <GameCard
-            onCardClick={() => setChoice(2)}
+            onCardClick={() => updateChoice(2)}
             gameName={"Connect 4"}
             imgPath={"../../images/banners/connect 4 banner.jpg"}
             playerCount={2}
             gameDuration={"15 min."}
           />
           <GameCard
-            onCardClick={() => setChoice(3)}
+            onCardClick={() => updateChoice(3)}
             gameName={"Snakes & Ladders"}
             imgPath={"../../images/banners/snake-and-ladders-banner.jpg"}
             playerCount={6}

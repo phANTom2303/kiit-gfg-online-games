@@ -1,5 +1,5 @@
 import { useState } from "react";
-import playSoundOf from "../soundHandler";
+import playSoundOf from "../../../components/soundHandler";
 import "./selectPlayer.css";
 function SelectPlayers({ onSubmit, createPly }) {
   const [players, setPlayers] = useState(2);
