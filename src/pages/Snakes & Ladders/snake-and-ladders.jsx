@@ -1,11 +1,11 @@
 import { useState } from "react";
-import SelectPlayers from "./SelectPlayers/selectPlayer";
+import SelectPlayers from "./SelectPlayers/selectPlayer.jsx";
 import PlayerDisplay from "./playerDisplay.jsx";
 import ResetButton from "./resetButton/resetButton.jsx";
 import PlayerTile from "./players/playerTile.jsx";
 import playSoundOf from "../../components/soundHandler.js";
-import "./fancySL.css";
-export default function FancySL({ soundStatus }) {
+import "./snake-and-ladders.css";
+export default function SnakeAndLadders({ soundStatus }) {
   const [playerCount, setPlayerCount] = useState(0);
   const [playerPostions, updatePlayerPositions] = useState(Array(4).fill(null));
   const [message, updateMessage] = useState("Waiting for Dice Roll...");

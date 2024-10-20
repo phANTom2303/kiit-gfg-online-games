@@ -2,7 +2,7 @@ import TicTacToe from "./pages/tictactoe/tictactoe";
 import Header from "./components/header/header";
 import GameCard from "./components/gameCard/GameCard";
 import Connect4 from "./pages/connect4/connect4";
-import FancySL from "./pages/Snakes & Ladders/fancySL";
+import SnakeAndLadders from "./pages/Snakes & Ladders/snake-and-ladders";
 import playSoundOf from "./components/soundHandler";
 import { useState } from "react";
 function App() {
@@ -49,7 +49,7 @@ function App() {
           soundStatus={soundStatus}
           updateSoundStatus={updateSoundStatus}
         />
-        <FancySL soundStatus={soundStatus} />
+        <SnakeAndLadders soundStatus={soundStatus} />
       </>
     );
   } else {
