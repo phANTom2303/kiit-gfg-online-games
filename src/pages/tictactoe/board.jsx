@@ -60,6 +60,7 @@ function Board({ soundStatus }) {
     setSquare(Array(3).fill(Array(3).fill(null)));
     changeTurn(1);
     setMessage("Turn of X");
+    playSoundOf("game-reset", soundStatus);
     declareWinner(0);
   }
 

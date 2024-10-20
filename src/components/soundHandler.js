@@ -56,7 +56,14 @@ function spacebarSound() {
 function gameWinSound() {
   const sound = new Audio();
   sound.src = "../../../sound-effects/tada.mp3";
-  sound.volume = 0.3;
+  sound.volume = 0.1;
+  sound.play();
+}
+
+function resetGameSound() {
+  const sound = new Audio();
+  sound.src = "../../../sound-effects/pageturn.mp3";
+  sound.volume = 0.1;
   sound.play();
 }
 
@@ -71,4 +78,5 @@ export default function playSoundOf(soundOf, soundStatus) {
   else if (soundOf == "game-start") gameStartSound();
   else if (soundOf == "spacebar") spacebarSound();
   else if (soundOf == "game-win") gameWinSound();
+  else if (soundOf == "game-reset") resetGameSound();
 }

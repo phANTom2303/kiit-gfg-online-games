@@ -192,7 +192,7 @@ export default function FancySL({ soundStatus }) {
     updatePlayerPositions(Array(6).fill(null));
     updatePlayerBoard(Array(100).fill(0b000));
     setWinner(-1);
-    playSoundOf("button", soundStatus);
+    playSoundOf("game-reset", soundStatus);
     setPlayerCount(0);
   }
 

@@ -177,6 +177,7 @@ function Connect4({ soundStatus }) {
     setTile(Array(7).fill(Array(6).fill(null)));
     setPlayer(1);
     setMessage("Turn of Red");
+    playSoundOf("game-reset", soundStatus);
     declareWinner(0);
   }
 
