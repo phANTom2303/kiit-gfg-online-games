@@ -1,51 +1,55 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap");
 
 .gameCard {
-    box-sizing: border-box;
-    border: 2px solid #070F2B;
-    width: 330px;
-    margin: 10px auto;
-    border-radius: 15px;
-    background-color: #1B1A55;
-    color: white;
-    display: flex;
-    flex-direction: column;
-    font-family: sans-serif;
+  box-sizing: border-box;
+  border: 2px solid #070f2b;
+  width: 330px;
+  margin: 10px auto;
+  border-radius: 15px;
+  background-color: #1b1a55;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  font-family: sans-serif;
 
-    font-family: "Poppins", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-    cursor: pointer;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  cursor: pointer;
+
+  font-size: calc(10px + 0.3vw);
 }
 
 .gameCard:hover {
-    border: 2px solid white;
+  transition: transform 0.2s ease-in-out, border 0.2s ease-in-out;
+  transform: scale(1.05);
+  border: 2px solid white;
 }
 
-.gameCard>img {
-    width: 100%;
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
+.gameCard > img {
+  width: 100%;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
 }
 
-.gameCard>div {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    margin-top: 6px;
-    padding: 0 10px;
+.gameCard > div {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 6px;
+  padding: 0 10px;
 }
 
 .cardDescription img {
-    height : 60%;
-    width: auto;
+  height: 60%;
+  width: auto;
 }
 
 .gameCard #gameName {
-    margin-right: auto;
+  margin-right: auto;
 }
 
 .gameCard #timerIcon {
-    margin-left: 5%;
-    height: 50%;
+  margin-left: 5%;
+  height: 50%;
 }

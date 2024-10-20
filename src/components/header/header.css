@@ -19,6 +19,11 @@
   cursor: pointer;
 }
 
+.header img:hover {
+  transition: transform 0.1s ease-in-out;
+  transform: scale(1.1);
+}
+
 .header ul {
   margin-left: auto;
   margin-right: 20px;
@@ -32,6 +37,16 @@
   font-size: calc(15px + 1.2vw);
 }
 
-.header li {
-  font-size: calc(7px + 0.7vw);
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.header * {
+  animation: fadeIn 0.5s ease-in-out;
 }

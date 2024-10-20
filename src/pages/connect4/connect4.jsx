@@ -1,8 +1,9 @@
 import "./connect4.css";
 import C4tile from "./C4tile";
 import { useState } from "react";
-import ResetButton from "./resetButton/resetButton";
-function Connect4() {
+import ResetButton from "../../components/resetButton/resetButton.jsx";
+import playSoundOf from "../../components/soundHandler";
+function Connect4({ soundStatus }) {
   const [tiles, setTile] = useState(Array(7).fill(Array(6).fill(null)));
   const [player, setPlayer] = useState(1);
   const [message, setMessage] = useState("Turn of Red");
@@ -157,12 +158,18 @@ function Connect4() {
     if (result == true) {
       if (player == 1) setMessage("Red Won");
       else setMessage("Yellow Won");
+      playSoundOf("game-win", soundStatus);
       declareWinner(1);
       return;
     }
 
-    if (player == -1) setMessage("Turn of Red");
-    else setMessage("Turn of Yellow");
+    if (player == -1) {
+      playSoundOf("pop1", soundStatus);
+      setMessage("Turn of Red");
+    } else {
+      playSoundOf("pop2", soundStatus);
+      setMessage("Turn of Yellow");
+    }
     setPlayer(player * -1);
   }
 
@@ -170,6 +177,7 @@ function Connect4() {
     setTile(Array(7).fill(Array(6).fill(null)));
     setPlayer(1);
     setMessage("Turn of Red");
+    playSoundOf("game-reset", soundStatus);
     declareWinner(0);
   }
 

@@ -4,16 +4,20 @@
 
 /* SCROLLING BAR */
 ::-webkit-scrollbar {
-  width: 5px;
+  width: 3px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #070f2b;
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #3b82f6;
+  background: #888;
   border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
 
 /* Scroll bar code ends */
@@ -28,13 +32,19 @@ body {
   flex-wrap: wrap;
 }
 
-@media (min-width: 1200px) {
-  .cardList > * {
-    width: 23%;
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
+.cardList * {
+  animation: fadeIn 0.5s ease-in-out;
+}
 
-@media (min-width: 900px) and (max-width: 1200px) {
+@media (min-width: 900px)  {
   .cardList > * {
     width: 30%;
   }
