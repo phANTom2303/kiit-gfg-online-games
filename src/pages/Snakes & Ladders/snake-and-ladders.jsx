@@ -1,7 +1,7 @@
 import { useState } from "react";
 import SelectPlayers from "./SelectPlayers/selectPlayer.jsx";
 import PlayerDisplay from "./playerDisplay.jsx";
-import ResetButton from "./resetButton/resetButton.jsx";
+import ResetButton from "../../components/resetButton/resetButton.jsx"
 import PlayerTile from "./players/playerTile.jsx";
 import playSoundOf from "../../components/soundHandler.js";
 import "./snake-and-ladders.css";

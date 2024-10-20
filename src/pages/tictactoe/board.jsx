@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Square from "./square";
-import ResetButton from "./resetButton/resetButton";
+import ResetButton from "../../components/resetButton/resetButton.jsx"
 import playSoundOf from "../../components/soundHandler";
 function Board({ soundStatus }) {
   const [squares, setSquare] = useState(Array(3).fill(Array(3).fill(null)));
