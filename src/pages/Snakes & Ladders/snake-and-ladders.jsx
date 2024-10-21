@@ -1,7 +1,7 @@
 import { useState } from "react";
 import SelectPlayers from "./SelectPlayers/selectPlayer.jsx";
 import PlayerDisplay from "./playerDisplay.jsx";
-import ResetButton from "../../components/resetButton/resetButton.jsx"
+import ResetButton from "../../components/resetButton/resetButton.jsx";
 import PlayerTile from "./players/playerTile.jsx";
 import playSoundOf from "../../components/soundHandler.js";
 import "./snake-and-ladders.css";
@@ -354,7 +354,10 @@ export default function SnakeAndLadders({ soundStatus }) {
           </div>
           <div className="diceBox">
             <PlayerDisplay curPlayer={currentPlayer} />
-            <button onClick={() => callGameLoop()}>
+            <button
+              className="flex items-center justify-center"
+              onClick={() => callGameLoop()}
+            >
               <img src="../images/dice-icon.png" alt="" id="dice-img" />
             </button>
           </div>

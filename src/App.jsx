@@ -88,7 +88,7 @@ function App() {
       <>
        <div className="min-h-screen bg-[url('/images/background.png')] bg-repeat bg-contain bg-center">
         <Header text={"Mini Games"} onImgClick={() => setChoice(0)} />
-        <div className="cardList">
+        <div className="cardList pb-[30px]">
         <GameCard
             onCardClick={() => updateChoice(3)}
             gameName={"Snakes & Ladders"}
