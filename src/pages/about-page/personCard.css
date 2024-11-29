@@ -1,0 +1,63 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap");
+
+.person-card {
+    margin: 10px;
+  width: 350px;
+  height: 600px;
+  /* border: 1px solid white; */
+  color: white;
+  padding: 12px 30px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  background-color: #1b1a55;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-between; */
+}
+
+.person-card .profile-pic {
+  border-radius: 15px;
+  width: 100%;
+  aspect-ratio: 1;
+  margin: 10px auto;
+}
+
+.person-card .person-name {
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.person-card .person-designation {
+  font-size: 1rem;
+  text-align: center;
+}
+
+.person-card .person-description {
+  font-size: 1 rem;
+  padding: 10px;
+  text-align: justify;
+}
+
+.person-card .person-links {
+  margin-top: auto;
+  justify-self: flex-end;
+  display: flex;
+  justify-content: center;
+  /* gap: 10%; */
+}
+.person-card .person-links a {
+    margin: auto;
+}
+
+.person-card .person-links img {
+  opacity: 0.7;
+}
+
+.person-card .person-links img:hover {
+  transition: transform 0.2s ease-in-out, opacity 0.2s ease-in-out;
+  transform: scale(1.1);
+  opacity: 1;
+}
