@@ -34,7 +34,7 @@
 }
 
 .header h1 {
-  font-size: calc(15px + 1.2vw);
+  font-size: calc(15px + 0.7vw);
 }
 
 
@@ -49,4 +49,13 @@
 
 .header * {
   animation: fadeIn 0.5s ease-in-out;
+}
+
+.header ul li{
+  width: clamp(30px,5vw,50px);
+  height: clamp(30px,5vw,50px);
+}
+
+.header ul img {
+  width : 100%;
 }

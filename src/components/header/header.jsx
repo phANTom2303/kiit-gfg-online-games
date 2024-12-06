@@ -20,7 +20,7 @@ function Header({
           <li style={{ cursor: "pointer" }} onClick={onImgClick}>
             <img
               src="../../header-icons/back-arrow.png"
-              style={{ height: "3vw", width: "3vw" }}
+              // style={{ height: "3vw", width: "3vw" }}
               alt="Go Back"
               className="header-icon"
             />
