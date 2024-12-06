@@ -19,7 +19,10 @@ function App() {
   if (choice == 1) {
     return (
       <>
-        <div className="min-h-screen bg-[url('/images/background.png')] bg-repeat bg-contain bg-center">
+        <div className="fixed top-0 -z-10 h-full w-full">
+          <div className="absolute inset-0 -z-10 h-full w-full items-center bg-[url('/images/background.png')] bg-repeat bg-contain bg-center"></div>
+        </div>
+        <div className="overflow-x-hidden antialiased mt-[100px]">
           <Header
             text={"Tic Tac Toe"}
             onImgClick={() => setChoice(0)}
@@ -35,7 +38,10 @@ function App() {
   } else if (choice == 2) {
     return (
       <>
-        <div className="min-h-screen bg-[url('/images/background.png')] bg-repeat bg-contain bg-center">
+        <div className="fixed top-0 -z-10 h-full w-full">
+          <div className="absolute inset-0 -z-10 h-full w-full items-center bg-[url('/images/background.png')] bg-repeat bg-contain bg-center"></div>
+        </div>
+        <div className="overflow-x-hidden antialiased mt-[100px]">
           <Header
             text={"Connect 4"}
             onImgClick={() => setChoice(0)}
@@ -51,7 +57,10 @@ function App() {
   } else if (choice == 3) {
     return (
       <>
-        <div className="min-h-screen bg-[url('/images/background.png')] bg-repeat bg-contain bg-center">
+        <div className="fixed top-0 -z-10 h-full w-full">
+          <div className="absolute inset-0 -z-10 h-full w-full items-center bg-[url('/images/background.png')] bg-repeat bg-contain bg-center"></div>
+        </div>
+        <div className="overflow-x-hidden antialiased mt-[100px]">
           <Header
             text={"Snakes & Ladders"}
             onImgClick={() => setChoice(0)}
@@ -66,50 +75,68 @@ function App() {
     );
   } else if (choice == 4) {
     return (
-      <div className="min-h-screen bg-[url('/images/background.png')] bg-repeat bg-contain bg-center">
-        <Header
-          text={"Chain Reaction"}
-          onImgClick={() => setChoice(0)}
-          withMuteButton={false}
-          soundStatus={soundStatus}
-          updateSoundStatus={updateSoundStatus}
-          onlyBackButton={true}
+      <>
+        <div className="fixed top-0 -z-10 h-full w-full">
+          <div className="absolute inset-0 -z-10 h-full w-full items-center bg-[url('/images/background.png')] bg-repeat bg-contain bg-center"></div>
+        </div>
+        <div className="overflow-x-hidden antialiased mt-[100px]">
+          <Header
+            text={"Chain Reaction"}
+            onImgClick={() => setChoice(0)}
+            withMuteButton={false}
+            soundStatus={soundStatus}
+            updateSoundStatus={updateSoundStatus}
+            onlyBackButton={true}
         />
-        <ChainReaction />
-      </div>
+          <ChainReaction />
+        </div>
+      </>
     );
   } else if (choice == 5) {
     return (
-      <div className="min-h-screen bg-[url('/images/background.png')] bg-repeat bg-contain bg-center">
-        <Header
-          text={"Hangman"}
-          onImgClick={() => setChoice(0)}
-          withMuteButton={false}
-          soundStatus={soundStatus}
-          updateSoundStatus={updateSoundStatus}
-          onlyBackButton={true}
+      <>
+        <div className="fixed top-0 -z-10 h-full w-full">
+          <div className="absolute inset-0 -z-10 h-full w-full items-center bg-[url('/images/background.png')] bg-repeat bg-contain bg-center"></div>
+        </div>
+        <div className="overflow-x-hidden antialiased mt-[100px]">
+          <Header
+            text={"Hangman"}
+            onImgClick={() => setChoice(0)}
+            withMuteButton={false}
+            soundStatus={soundStatus}
+            updateSoundStatus={updateSoundStatus}
+            onlyBackButton={true}
         />
-        <Hangman />
-      </div>
+          <Hangman />
+        </div>
+      </>
     );
   } else if (choice == 6) {
     return (
-      <div className="min-h-screen bg-[url('/images/background.png')] bg-repeat bg-contain bg-center">
-        <Header
-          text={"About Us"}
-          onImgClick={() => setChoice(0)}
-          withMuteButton={false}
-          soundStatus={soundStatus}
-          updateSoundStatus={updateSoundStatus}
-          onlyBackButton={true}
+      <>
+        <div className="fixed top-0 -z-10 h-full w-full">
+          <div className="absolute inset-0 -z-10 h-full w-full items-center bg-[url('/images/background.png')] bg-repeat bg-contain bg-center"></div>
+        </div>
+        <div className="overflow-x-hidden antialiased mt-[100px]">
+          <Header
+            text={"About Us"}
+            onImgClick={() => setChoice(0)}
+            withMuteButton={false}
+            soundStatus={soundStatus}
+            updateSoundStatus={updateSoundStatus}
+            onlyBackButton={true}
         />
-        <AboutPage />
-      </div>
+          <AboutPage />
+        </div>
+      </>
     );
   } else {
     return (
       <>
-        <div className="min-h-screen bg-[url('/images/background.png')] bg-repeat bg-contain bg-center">
+        <div className="fixed top-0 -z-10 h-full w-full">
+          <div className="absolute inset-0 -z-10 h-full w-full items-center bg-[url('/images/background.png')] bg-repeat bg-contain bg-center"></div>
+        </div>
+        <div className="overflow-x-hidden antialiased mt-[100px]">
           <Header text={"Mini Games"} onImgClick={() => setChoice(0)} />
           <div className="cardList pb-[30px]">
             <GameCard

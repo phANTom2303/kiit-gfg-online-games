@@ -10,7 +10,7 @@ function Header({
 }) {
   if (onlyBackButton) {
     return (
-      <div className="header">
+      <div className="header fixed w-full z-50 top-0">
         <img
           src="../../images/online game logo.png"
           alt=""
@@ -60,7 +60,7 @@ function Header({
     );
   } else {
     return (
-      <div className="header">
+      <div className="header fixed w-full z-50 top-0">
         <img
           src="../../images/online game logo.png"
           alt=""
