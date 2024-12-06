@@ -145,7 +145,7 @@ function App() {
             <GameCard
               onCardClick={() => setChoice(6)}
               gameName={"About Page"}
-              imgPath={"../../images/banners/gfg-logo.jpg"}
+              imgPath={"../../images/banners/gfg-logo.png"}
               playerCount={"Many"}
               gameDuration={"A lot"}
             />
