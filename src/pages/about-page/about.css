@@ -47,6 +47,19 @@
   height: 100%;
 }
 
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.about-page * {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
 @media (max-width: 730px) {
   .about-page .gfg-section {
     flex-direction: column;
