@@ -70,10 +70,10 @@ function App() {
         <Header
           text={"Chain Reaction"}
           onImgClick={() => setChoice(0)}
-          withMuteButton={true}
+          withMuteButton={false}
           soundStatus={soundStatus}
           updateSoundStatus={updateSoundStatus}
-          onlyBackButton={false}
+          onlyBackButton={true}
         />
         <ChainReaction />
       </div>
@@ -84,10 +84,10 @@ function App() {
         <Header
           text={"Hangman"}
           onImgClick={() => setChoice(0)}
-          withMuteButton={true}
+          withMuteButton={false}
           soundStatus={soundStatus}
           updateSoundStatus={updateSoundStatus}
-          onlyBackButton={false}
+          onlyBackButton={true}
         />
         <Hangman />
       </div>
