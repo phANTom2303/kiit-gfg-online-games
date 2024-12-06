@@ -3,11 +3,12 @@ import MuteButton from "../muteButton";
 function Header({
   text,
   onImgClick,
-  backButton,
+  withMuteButton,
   soundStatus,
   updateSoundStatus,
+  onlyBackButton,
 }) {
-  if (backButton) {
+  if (onlyBackButton) {
     return (
       <div className="header fixed w-full z-50 top-0">
         <img
@@ -20,7 +21,29 @@ function Header({
           <li style={{ cursor: "pointer" }} onClick={onImgClick}>
             <img
               src="../../header-icons/back-arrow.png"
-              style={{ height: "3vw", width: "3vw" }}
+              // style={{ height: "3vw", width: "3vw" }}
+              alt="Go Back"
+              className="header-icon"
+            />
+          </li>
+        </ul>
+      </div>
+    );
+
+  } else if (withMuteButton) {
+    return (
+      <div className="header">
+        <img
+          src="../../images/online game logo.png"
+          alt=""
+          onClick={onImgClick}
+        />
+        <h1 className="title">{text}</h1>
+        <ul>
+          <li style={{ cursor: "pointer" }} onClick={onImgClick}>
+            <img
+              src="../../header-icons/back-arrow.png"
+              // style={{ height: "3vw", width: "3vw" }}
               alt="Go Back"
               className="header-icon"
             />
@@ -32,15 +55,6 @@ function Header({
           >
             <MuteButton soundStatus={soundStatus} className="header-icon" />
           </li>
-
-          {/* <li style={{ cursor: "pointer" }}>
-            <img
-              src="../../header-icons/info-icon.png"
-              style={{ height: "3vw", width: "3vw" }}
-              alt="About"
-              className="header-icon"
-            />
-          </li> */}
         </ul>
       </div>
     );
@@ -54,16 +68,6 @@ function Header({
           className="header-icon"
         />
         <h1 className="title">{text}</h1>
-        <ul>
-          {/* <li style={{ cursor: "pointer", textDecoration: "underline" }}>
-            <img
-              src="../../header-icons/info-icon.png"
-              style={{ height: "3vw", width: "3vw" }}
-              alt="About"
-              className="header-icon"
-            />
-          </li> */}
-        </ul>
       </div>
     );
   }

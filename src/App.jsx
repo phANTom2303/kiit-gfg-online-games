@@ -26,9 +26,10 @@ function App() {
           <Header
             text={"Tic Tac Toe"}
             onImgClick={() => setChoice(0)}
-            backButton={true}
+            withMuteButton={true}
             soundStatus={soundStatus}
             updateSoundStatus={updateSoundStatus}
+            onlyBackButton={false}
           />
           <TicTacToe soundStatus={soundStatus} />
         </div>
@@ -44,9 +45,10 @@ function App() {
           <Header
             text={"Connect 4"}
             onImgClick={() => setChoice(0)}
-            backButton={true}
+            withMuteButton={true}
             soundStatus={soundStatus}
             updateSoundStatus={updateSoundStatus}
+            onlyBackButton={false}
           />
           <Connect4 soundStatus={soundStatus} />
         </div>
@@ -62,9 +64,10 @@ function App() {
           <Header
             text={"Snakes & Ladders"}
             onImgClick={() => setChoice(0)}
-            backButton={true}
+            withMuteButton={true}
             soundStatus={soundStatus}
             updateSoundStatus={updateSoundStatus}
+            onlyBackButton={false}
           />
           <SnakeAndLadders soundStatus={soundStatus} />
         </div>
@@ -80,10 +83,11 @@ function App() {
           <Header
             text={"Chain Reaction"}
             onImgClick={() => setChoice(0)}
-            backButton={true}
+            withMuteButton={false}
             soundStatus={soundStatus}
             updateSoundStatus={updateSoundStatus}
-          />
+            onlyBackButton={true}
+        />
           <ChainReaction />
         </div>
       </>
@@ -98,10 +102,11 @@ function App() {
           <Header
             text={"Hangman"}
             onImgClick={() => setChoice(0)}
-            backButton={true}
+            withMuteButton={false}
             soundStatus={soundStatus}
             updateSoundStatus={updateSoundStatus}
-          />
+            onlyBackButton={true}
+        />
           <Hangman />
         </div>
       </>
@@ -116,10 +121,11 @@ function App() {
           <Header
             text={"About Us"}
             onImgClick={() => setChoice(0)}
-            backButton={true}
+            withMuteButton={false}
             soundStatus={soundStatus}
             updateSoundStatus={updateSoundStatus}
-          />
+            onlyBackButton={true}
+        />
           <AboutPage />
         </div>
       </>
@@ -172,7 +178,7 @@ function App() {
             <GameCard
               onCardClick={() => setChoice(6)}
               gameName={"About Page"}
-              imgPath={"../../images/banners/placeHolderBanner.png"}
+              imgPath={"../../images/banners/gfg-logo.png"}
               playerCount={"Many"}
               gameDuration={"A lot"}
             />
