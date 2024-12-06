@@ -23,9 +23,10 @@ function App() {
           <Header
             text={"Tic Tac Toe"}
             onImgClick={() => setChoice(0)}
-            backButton={true}
+            withMuteButton={true}
             soundStatus={soundStatus}
             updateSoundStatus={updateSoundStatus}
+            onlyBackButton={false}
           />
           <TicTacToe soundStatus={soundStatus} />
         </div>
@@ -38,9 +39,10 @@ function App() {
           <Header
             text={"Connect 4"}
             onImgClick={() => setChoice(0)}
-            backButton={true}
+            withMuteButton={true}
             soundStatus={soundStatus}
             updateSoundStatus={updateSoundStatus}
+            onlyBackButton={false}
           />
           <Connect4 soundStatus={soundStatus} />
         </div>
@@ -53,9 +55,10 @@ function App() {
           <Header
             text={"Snakes & Ladders"}
             onImgClick={() => setChoice(0)}
-            backButton={true}
+            withMuteButton={true}
             soundStatus={soundStatus}
             updateSoundStatus={updateSoundStatus}
+            onlyBackButton={false}
           />
           <SnakeAndLadders soundStatus={soundStatus} />
         </div>
@@ -67,9 +70,10 @@ function App() {
         <Header
           text={"Chain Reaction"}
           onImgClick={() => setChoice(0)}
-          backButton={true}
+          withMuteButton={true}
           soundStatus={soundStatus}
           updateSoundStatus={updateSoundStatus}
+          onlyBackButton={false}
         />
         <ChainReaction />
       </div>
@@ -80,9 +84,10 @@ function App() {
         <Header
           text={"Hangman"}
           onImgClick={() => setChoice(0)}
-          backButton={true}
+          withMuteButton={true}
           soundStatus={soundStatus}
           updateSoundStatus={updateSoundStatus}
+          onlyBackButton={false}
         />
         <Hangman />
       </div>
@@ -93,9 +98,10 @@ function App() {
         <Header
           text={"About Us"}
           onImgClick={() => setChoice(0)}
-          backButton={true}
+          withMuteButton={false}
           soundStatus={soundStatus}
           updateSoundStatus={updateSoundStatus}
+          onlyBackButton={true}
         />
         <AboutPage />
       </div>
