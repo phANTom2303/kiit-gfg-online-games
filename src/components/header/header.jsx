@@ -32,7 +32,7 @@ function Header({
 
   } else if (withMuteButton) {
     return (
-      <div className="header">
+      <div className="header fixed w-full z-50 top-0">
         <img
           src="../../images/online game logo.png"
           alt=""
