@@ -45,7 +45,7 @@ export default function AboutPage() {
 
         <PersonCard
           imgPath={"../../images/profile-images/saket-profile.jpg"}
-          name={"Saket Sourav"}
+          name={"Saket Saurav"}
           designation={"Front End Developer"}
           description={
             "Developed the Hangman game and contributed to various front end aspects."
