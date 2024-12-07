@@ -30,6 +30,7 @@ function App() {
             soundStatus={soundStatus}
             updateSoundStatus={updateSoundStatus}
             onlyBackButton={false}
+            game={1}
           />
           <TicTacToe soundStatus={soundStatus} />
         </div>
@@ -49,6 +50,7 @@ function App() {
             soundStatus={soundStatus}
             updateSoundStatus={updateSoundStatus}
             onlyBackButton={false}
+            game={2}
           />
           <Connect4 soundStatus={soundStatus} />
         </div>
@@ -68,6 +70,7 @@ function App() {
             soundStatus={soundStatus}
             updateSoundStatus={updateSoundStatus}
             onlyBackButton={false}
+            game={3}
           />
           <SnakeAndLadders soundStatus={soundStatus} />
         </div>
@@ -87,7 +90,8 @@ function App() {
             soundStatus={soundStatus}
             updateSoundStatus={updateSoundStatus}
             onlyBackButton={true}
-        />
+            game={4}
+          />
           <ChainReaction />
         </div>
       </>
@@ -106,7 +110,8 @@ function App() {
             soundStatus={soundStatus}
             updateSoundStatus={updateSoundStatus}
             onlyBackButton={true}
-        />
+            game={5}
+          />
           <Hangman />
         </div>
       </>
@@ -125,7 +130,8 @@ function App() {
             soundStatus={soundStatus}
             updateSoundStatus={updateSoundStatus}
             onlyBackButton={true}
-        />
+            game={6}
+          />
           <AboutPage />
         </div>
       </>
