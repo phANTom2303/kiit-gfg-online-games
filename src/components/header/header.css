@@ -13,6 +13,10 @@
   border-bottom-right-radius: 15px;
 }
 
+.info {
+  
+}
+
 .header img {
   width: clamp(75px, 10vw, 100px);
   height: auto;
