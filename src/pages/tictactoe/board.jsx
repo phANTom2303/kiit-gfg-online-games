@@ -1,12 +1,51 @@
-import { useState } from "react";
+import { useEffect ,useMemo, useState } from "react";
+import {io} from 'socket.io-client';
 import Square from "./square";
 import ResetButton from "../../components/resetButton/resetButton.jsx"
 import playSoundOf from "../../components/soundHandler";
+
+
 function Board({ soundStatus }) {
   const [squares, setSquare] = useState(Array(3).fill(Array(3).fill(null)));
   const [turn, changeTurn] = useState(1);
   const [winState, declareWinner] = useState(0);
   const [message, setMessage] = useState("Turn of X");
+  const [name, setName] = useState('');
+  const [socketId, setSocketId] = useState('');
+  
+  useEffect(() =>{
+
+    let name = prompt("Enter your name");
+    setName(name);
+    
+    socket.on("connect", () => {
+      setSocketId(socket.id);
+      console.log(`${name} you are connected.`);
+    });
+
+    socket.emit("new-user",{name,room});
+
+    socket.on("all-users",(users)=>{
+      console.log(users);
+    });
+
+    socket.on("connected-user",(name)=>{
+      console.log(`${name} connected`);
+    });
+  
+    socket.on("receive-mesage",(data)=>{
+      console.log(`${data.name} : ${data.message}`);
+    });
+
+    socket.on("user-disconnected",(name)=>{
+      console.log(`${name} disconnected`);
+    });
+  
+    return () => {
+      socket.disconnect(name);
+    };
+  
+  }, [socket]);
 
   function handleClick(i, j) {
     if (winState != 0 || turn > 9 || squares[i][j] != null) {
