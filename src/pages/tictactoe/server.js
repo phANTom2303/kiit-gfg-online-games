@@ -2,7 +2,6 @@ import express from "express";
 import { Server } from "socket.io";
 import { createServer } from "http";
 import cors from "cors";
-import { ssrExportAllKey } from "vite/runtime";
 import { name } from "ejs";
 
 const port = 3000;
@@ -48,11 +47,14 @@ io.on("connection", (socket) => {
     }
     socket.broadcast.emit("connected-user", data.name);
     io.emit("all-users", user_name);
-    console.log(user_name);
-    console.log(rooms);
+  });
+
+  socket.on("state", (data) => {
+    console.log(data);
   });
 
   socket.on("message", (data) => {
+    console.log(data);
     if (data.room != "") {
       io.to(data.room).emit("receive-mesage", data);
     } else {

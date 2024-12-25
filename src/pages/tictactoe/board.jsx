@@ -6,7 +6,6 @@ import {io} from 'socket.io-client';
 function Board({ soundStatus }) {
   const socket = useMemo(() => io("http://localhost:3000"), []);
 
-
   const [squares, setSquare] = useState(Array(3).fill(Array(3).fill(null)));
   const [turn, changeTurn] = useState(1);
   const [winState, declareWinner] = useState(0);
@@ -17,7 +16,7 @@ function Board({ soundStatus }) {
 
   async function handleClick(i, j) {
     console.log('clicked');
-    await socket.emit("state",{squares,winState,turn,message,room,name});
+
     if (winState != 0 || turn > 9 || squares[i][j] != null) {
       return 0;
     }
@@ -44,7 +43,6 @@ function Board({ soundStatus }) {
     setMessage("Turn of " + ((turn + 1) % 2 == 1 ? "X" : "O"));
     changeTurn(turn + 1);
     if (turn == 9 && winState == 0) setMessage("Draw");
- 
 
     socket.emit("state",{squares,winState,turn,message,name});
   }
@@ -86,10 +84,9 @@ function Board({ soundStatus }) {
 
     socket.emit("new-user",{name});
 
-
-    socket.on("update",(data)=>{
-      console.log(data);
-    });
+    // socket.on("update",(data)=>{
+    //   console.log(data);
+    // });
 
     socket.on("all-users",(users)=>{
       console.log(users);
