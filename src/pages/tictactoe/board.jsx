@@ -1,26 +1,18 @@
-import { useState,useEffect,useMemo } from "react";
+import { useState } from "react";
 import Square from "./square";
 import ResetButton from "../../components/resetButton/resetButton.jsx"
 import playSoundOf from "../../components/soundHandler";
-import {io} from 'socket.io-client';
 function Board({ soundStatus }) {
-  const socket = useMemo(() => io("http://localhost:3000"), []);
-
-
   const [squares, setSquare] = useState(Array(3).fill(Array(3).fill(null)));
   const [turn, changeTurn] = useState(1);
   const [winState, declareWinner] = useState(0);
   const [message, setMessage] = useState("Turn of X");
-  const [name, setName] = useState('');
-  const [room, setRoom] = useState('');
-  const [socketId, setSocketId] = useState('');
 
-  async function handleClick(i, j) {
-    console.log('clicked');
-    await socket.emit("state",{squares,winState,turn,message,room,name});
+  function handleClick(i, j) {
     if (winState != 0 || turn > 9 || squares[i][j] != null) {
       return 0;
     }
+
     //the JSON.parse technique is from gemini AI
     const nextSquares = JSON.parse(JSON.stringify(squares));
 
@@ -44,9 +36,6 @@ function Board({ soundStatus }) {
     setMessage("Turn of " + ((turn + 1) % 2 == 1 ? "X" : "O"));
     changeTurn(turn + 1);
     if (turn == 9 && winState == 0) setMessage("Draw");
- 
-
-    socket.emit("state",{squares,winState,turn,message,name});
   }
 
   function checkWin(row, col, grid) {
@@ -74,45 +63,6 @@ function Board({ soundStatus }) {
     playSoundOf("game-reset", soundStatus);
     declareWinner(0);
   }
-
-  useEffect(() =>{
-    let name = prompt("Enter your Name:");
-    setName(name);
-
-    socket.on("connect", () => {
-      console.log(socket.id);
-      setSocketId(socket.id);
-      console.log(`${name} you are connected.`);
-    });
-
-    socket.emit("new-user",{name});
-
-
-    socket.on("update",(data)=>{
-      console.log(data);
-    });
-
-    socket.on("all-users",(users)=>{
-      console.log(users);
-    });
-
-    socket.on("connected-user",(name)=>{
-      console.log(`${name} connected`);
-    });
-  
-    socket.on("receive-mesage",(data)=>{
-      console.log(`${data.name} : ${data.message}`);
-    });
-
-    socket.on("user-disconnected",(name)=>{
-      console.log(`${name} disconnected`);
-    });
-  
-    return () => {
-      socket.disconnect(name);
-    };
-  
-  }, [socket]);
 
   return (
     <div className="tictactoe">
