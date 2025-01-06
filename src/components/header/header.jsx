@@ -32,7 +32,7 @@ function Header({
       {popUp && (
         <div className="fixed top-0 z-40 h-full w-full">
           <div className="absolute inset-0 z-10 h-full w-full items-center flex justify-center bg-[#000000]/40">
-            <div className="h-[80%] w-[85%] max-w-[800px] bg-blue-500 rounded-3xl flex flex-col items-center justify-start shadow-lg shadow-blue-700 overflow-hidden">
+            <div className="h-[80%] w-[85%] max-w-[500px] bg-blue-500 rounded-2xl flex flex-col items-center justify-start shadow-lg shadow-blue-700 overflow-hidden">
               <div className="flex items-center justify-end pt-2 w-full px-3">
                 <IoClose
                   className="text-5xl text-[#1b1a55] cursor-pointer hover:scale-105 transition-all ease-in-out duration-200 hover:rotate-90"
