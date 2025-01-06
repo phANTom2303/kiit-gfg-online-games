@@ -1,0 +1,14 @@
+.info-box { 
+    color: white;
+    font-size: large;
+    font-weight: bold;
+}
+
+.info-box li {
+    margin:10px auto;
+    
+}
+
+.info-box img {
+    width: 200px;
+}
