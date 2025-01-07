@@ -8,9 +8,11 @@ export default function PersonCard({
   gitHubLink,
   linkedInLink,
   instagramLink,
+  placeholderClass
 }) {
+  const combinedClasses = `person-card ${placeholderClass}`;
   return (
-    <div className="person-card">
+    <div className= {combinedClasses}>
       <img className="profile-pic" src={imgPath} alt="profile" />
       <div className="person-text">
         <div className="person-name">{name}</div>
