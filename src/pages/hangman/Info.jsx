@@ -1,5 +1,6 @@
 import React from "react";
 import { ScrollShadow } from "@nextui-org/react";
+import './info.css'
 
 const HangmanInfo = () => {
   return (
