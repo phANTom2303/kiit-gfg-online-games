@@ -58,27 +58,31 @@ export default function AboutPage() {
         />
 
         <PersonCard
-          imgPath={""}
+          imgPath={"../../images/profile-images/hritika-sharan-profile.jpg"}
           name={"Hritika Sharan"}
           designation={"Back End Developer"}
           description={
             "Developed the chat and multiplayer functionality game and contributed to various back end aspects."
           }
-          gitHubLink={""}
-          linkedInLink={""}
-          instagramLink={""}
+          gitHubLink={"https://github.com/hritika2409"}
+          linkedInLink={
+            "https://www.linkedin.com/in/hritika-sharan-9039b62a1?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+          }
+          instagramLink={
+            "https://www.instagram.com/hritika_sharan?igsh=MTBmYmhyNW5ocjI3dw=="
+          }
         />
 
         <PersonCard
-          imgPath={""}
+          imgPath={"../../images/profile-images/ashish-kumar-profile.jpg"}
           name={"Ashish Kumar"}
           designation={"Back End Developer"}
           description={
             "Developed the chat and multiplayer functionality game and contributed to various back end aspects."
           }
-          gitHubLink={""}
-          linkedInLink={""}
-          instagramLink={""}
+          gitHubLink={"https://github.com/ashish-xt"}
+          linkedInLink={"https://www.linkedin.com/in/ashish029/"}
+          instagramLink={"https://www.instagram.com/ashish.xt/#"}
         />
 
         <PersonCard
