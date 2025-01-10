@@ -5,17 +5,19 @@ export default function AboutPage() {
   return (
     <div className="about-page">
       <div className="gfg-section">
-        
         <img
           src="../../images/banners/gfg-logo.png"
           alt=""
           className="gfg-logo"
         />
-          
+
         <div className="gfg-text">
           <div className="first-text">A product of:</div>
           <div className="hero-text">GFG Student Chapter,KIIT</div>
-          <div className="text-description">Made with the passion and hardwork of the following developers from the Core Development domain of GFG Student Chapter, KIIT</div>
+          <div className="text-description">
+            Made with the passion and hardwork of the following developers from
+            the Core Development domain of GFG Student Chapter, KIIT
+          </div>
         </div>
       </div>
       <div className="person-list">
@@ -53,6 +55,47 @@ export default function AboutPage() {
           gitHubLink={"https://github.com/sakettt25"}
           linkedInLink={"https://www.linkedin.com/in/sakettt25"}
           instagramLink={"https://www.instagram.com/sakettt_25"}
+        />
+
+        <PersonCard
+          imgPath={"../../images/profile-images/hritika-sharan-profile.jpg"}
+          name={"Hritika Sharan"}
+          designation={"Back End Developer"}
+          description={
+            "Developed the chat and multiplayer functionality game and contributed to various back end aspects."
+          }
+          gitHubLink={"https://github.com/hritika2409"}
+          linkedInLink={
+            "https://www.linkedin.com/in/hritika-sharan-9039b62a1?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+          }
+          instagramLink={
+            "https://www.instagram.com/hritika_sharan?igsh=MTBmYmhyNW5ocjI3dw=="
+          }
+        />
+
+        <PersonCard
+          imgPath={"../../images/profile-images/ashish-kumar-profile.jpg"}
+          name={"Ashish Kumar"}
+          designation={"Back End Developer"}
+          description={
+            "Developed the chat and multiplayer functionality game and contributed to various back end aspects."
+          }
+          gitHubLink={"https://github.com/ashish-xt"}
+          linkedInLink={"https://www.linkedin.com/in/ashish029/"}
+          instagramLink={"https://www.instagram.com/ashish.xt/#"}
+        />
+
+        <PersonCard
+          imgPath={"../../images/profile-images/saket-profile.jpg"}
+          name={"Saket Saurav"}
+          designation={"Front End Developer"}
+          description={
+            "Developed the Hangman game and contributed to various front end aspects."
+          }
+          gitHubLink={"https://github.com/sakettt25"}
+          linkedInLink={"https://www.linkedin.com/in/sakettt25"}
+          instagramLink={"https://www.instagram.com/sakettt_25"}
+          placeholderClass={"placeholder"}
         />
       </div>
     </div>
