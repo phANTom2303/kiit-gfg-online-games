@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap');
+
+
+.selectPlayer {
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    background-color: #5A9DEE;
+    border-radius: 30px;
+    
+}
+
+.selectPlayer > div {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 10px auto;
+}
+
+.selectPlayer button{
+    padding: 10px;
+    border-radius: 10px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    background-color:#1B1A55;
+    color: white;
+    cursor: pointer;
+}
+
+.selectPlayer button:hover{
+    transition: transform 0.1s ease-in-out;
+    transform: scale(1.1);
+}
+#increasePlayer {
+    background-color: #24B04F;
+    color: black;
+}
+
+#decreasePlayer {
+    background-color: #EB1C24;
+    color: white;
+}
+
+#submitPlayers {
+    background-color: #FADC4A;
+    color: black;
+}

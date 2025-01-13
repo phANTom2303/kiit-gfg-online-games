@@ -1,89 +1,105 @@
-.connect4{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.connect4 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
+.connect4 .prompt-box {
+  box-sizing: border-box;
+  border: 5px solid hsla(224, 81%, 47%, 0.997);
+  background-color: white;
+  border-radius: 14px;
+  padding: 10px;
+  width: fit-content;
+  height: 50 px;
+  margin: 2px auto;
 
-.prompt-box {
-    box-sizing: border-box;
-    border: 5px solid hsla(224, 81%, 47%, 0.997);
-    background-color: white;
-    border-radius: 14px;
-    padding: 10px;
-    width: fit-content;
-    height: 50 px;
-    margin: 2px auto;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
 
-    font-family: "Poppins", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-
-    text-align: center;
-    align-self: center;
+  text-align: center;
+  align-self: center;
 }
 
-.c4board {
-    padding: 10px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    border-radius: 50px;
-    display: flex;
-    justify-content: center;
-    width: 480px;
-    background-color: hsla(224, 81%, 47%, 0.997);
+.connect4 .c4board {
+  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: 50px;
+  display: flex;
+  justify-content: center;
+  width: 480px;
+  background-color: hsla(224, 81%, 47%, 0.997);
 }
 
-.c4board *{
-    box-sizing: border-box;
+.connect4 .c4board * {
+  box-sizing: border-box;
 }
 
-.column {
-    display: flex;
-    flex-direction: column;
-    border-radius: 100px;
-    width: 14.2%;
-    height: 100%;
-    border: 2px solid hsla(0, 0%, 100%, 0);
+.connect4 .column {
+  display: flex;
+  flex-direction: column;
+  border-radius: 100px;
+  width: 14.2%;
+  height: 100%;
+  border: 2px solid hsla(0, 0%, 100%, 0);
 }
 
-.column:hover {
-    
-    border: 2px solid white;
-    background-color: white;
+.connect4 .column:hover {
+  transition: border 0.1s ease-in-out, background-color 0.1s ease-in-out;
+  border: 2px solid white;
+  background-color: white;
 
-    .tile {
-        background-color: #1B1A55;
-    }
+  .tile {
+    transition: background-color 0.1s ease-in-out;
+    background-color: #1b1a55;
+  }
 
-    .red {
-        background-color: red;
-    }
-
-    .yellow {
-        background-color: yellow;
-    }
-}
-
-.tile {
-    height: 16%;
-    aspect-ratio: 1;
-    margin: 2px;
-    border-radius: 200px;
-    background-color: #1B1A55;
-}
-
-.red {
+  .red {
+    transition: background-color 0.1s ease-in-out;
     background-color: red;
+  }
+
+  .yellow {
+    transition: background-color 0.1s ease-in-out;
+    background-color: yellow;
+  }
 }
 
-.yellow {
-    background-color: yellow;
+.connect4 .tile {
+  height: 16%;
+  aspect-ratio: 1;
+  margin: 2px;
+  border-radius: 200px;
+  background-color: #1b1a55;
+}
+
+.connect4 .red {
+  background-color: red;
+}
+
+.connect4 .yellow {
+  background-color: yellow;
 }
 
 @media (max-width: 530px) {
-    .c4board {
-        width: 90%;
-        border-radius: 10%;
-    }
+  .connect4 .c4board {
+    width: 90%;
+    border-radius: 10%;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.connect4 .prompt-box,
+.connect4 .c4board * {
+  animation: fadeIn 0.5s ease-in-out;
 }

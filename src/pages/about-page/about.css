@@ -1,0 +1,87 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap");
+
+.about-page {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+
+  display: flex;
+  flex-direction: column;
+  gap:20px;
+}
+.about-page .gfg-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin: 0 auto;
+  background-color: #1b1a55;
+  border-radius: 15px;
+  width: 700px;
+}
+
+.about-page .first-text {
+  color: rgba(255, 255, 255, 0.668);
+  font-size: small;
+}
+
+.about-page .hero-text {
+  color: white;
+  font-size: x-large;
+  font-weight: bold;
+}
+
+.about-page .text-description {
+  color: white;
+}
+.about-page .gfg-section .gfg-logo {
+  width: 300px;
+  border-radius: 15px;
+}
+
+.about-page .person-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 5%;
+  height: 100%;
+}
+
+.placeholder{
+  opacity: 0%;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.about-page * {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@media (max-width: 730px) {
+  .about-page .gfg-section {
+    flex-direction: column;
+    width: 320px;
+  }
+
+  .about-page .gfg-logo {
+    width: 100%;
+    margin: 10px;
+  }
+
+  .about-page .gfg-text {
+    padding: 10px;
+  }
+}
+
+@media (max-width: 320px) {
+  .about-page .gfg-section {
+    width: 95%;
+  }
+}
