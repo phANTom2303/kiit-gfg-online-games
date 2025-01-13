@@ -1,14 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { useGame } from './GameContext';
-import Board from './Board';
-import GameChat from './GameChat';
+import React, { useState, useEffect } from "react";
+import { useGame } from "./GameContext";
+import Board from "./Board";
+import GameChat from "./GameChat";
 
 const GameRoom = ({ soundStatus }) => {
   const { gameState, messages } = useGame();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-  
     const timer = setTimeout(() => {
       setLoading(false);
     }, 5000);
@@ -33,9 +32,14 @@ const GameRoom = ({ soundStatus }) => {
         <div className="inline-block bg-white rounded-lg shadow-md">
           <div className="py-2 px-4">
             <h2 className="text-lg font-bold">
-              Room Code: <span className="font-mono bg-gray-100 px-2 py-1 rounded">{gameState?.id}</span>
+              Room Code:{" "}
+              <span className="font-mono bg-gray-100 px-2 py-1 rounded">
+                {gameState?.id}
+              </span>
             </h2>
-            <p className="text-sm text-gray-500">Share this code with friends to play together!</p>
+            <p className="text-sm text-gray-500">
+              Share this code with friends to play together!
+            </p>
           </div>
         </div>
       </div>
@@ -45,9 +49,9 @@ const GameRoom = ({ soundStatus }) => {
           <Board soundStatus={soundStatus} />
         </div>
         <div className="bg-white rounded-lg shadow-md">
-          <GameChat 
-            socket={gameState?.socket} 
-            gameState={gameState} 
+          <GameChat
+            socket={gameState?.socket}
+            gameState={gameState}
             messages={messages}
           />
         </div>

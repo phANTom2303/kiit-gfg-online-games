@@ -1,38 +1,40 @@
-import React, { useState } from 'react';
-import { useGame } from './GameContext';
+import React, { useState } from "react";
+import { useGame } from "./GameContext";
 
-const GameLobby = () => {
+const GameLobby = ({ onGameStart }) => {
   const { socket } = useGame();
-  const [playerName, setPlayerName] = useState('');
-  const [roomCode, setRoomCode] = useState('');
-  const [error, setError] = useState('');
+  const [playerName, setPlayerName] = useState("");
+  const [roomCode, setRoomCode] = useState("");
+  const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   const createGame = () => {
     if (!playerName.trim()) {
-      setError('Please enter your name');
+      setError("Please enter your name");
       return;
     }
-    
+
     setIsLoading(true);
-    setError('');
-    
-    console.log('Creating game for player:', playerName);
-    socket.emit('createGame', playerName);
+    setError("");
+
+    console.log("Creating game for player:", playerName);
+    socket.emit("createGame", playerName);
+    onGameStart();
   };
 
   const joinGame = (e) => {
     e.preventDefault();
     if (!playerName.trim() || !roomCode.trim()) {
-      setError('Please enter both your name and room code');
+      setError("Please enter both your name and room code");
       return;
     }
-    
+
     setIsLoading(true);
-    setError('');
-    
-    console.log('Joining game:', { playerName, roomCode });
-    socket.emit('joinGame', { gameId: roomCode, playerName });
+    setError("");
+
+    console.log("Joining game:", { playerName, roomCode });
+    socket.emit("joinGame", { gameId: roomCode, playerName });
+    onGameStart();
   };
 
   if (isLoading) {
@@ -59,9 +61,7 @@ const GameLobby = () => {
       )}
 
       <div className="mb-4">
-        <label className="block text-sm font-medium mb-2">
-          Your Name
-        </label>
+        <label className="block text-sm font-medium mb-2">Your Name</label>
         <input
           type="text"
           placeholder="Enter your name"
