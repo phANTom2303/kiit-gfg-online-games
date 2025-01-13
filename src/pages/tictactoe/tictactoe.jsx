@@ -1,13 +1,48 @@
+import React, { useState } from 'react';
+import { GameProvider } from './GameContext';
+import GameLobby from './GameLobby';
+import GameRoom from './GameRoom';
+import { useGame } from './GameContext';
 import "./tictactoe.css";
-import Board from "./board";
-function TicTacToe({soundStatus}) {
+
+const GameContent = ({ soundStatus }) => {
+  const { socket, gameState } = useGame();
+  const [inGame, setInGame] = useState(false);
+
+  if (!socket) {
+    return (
+      <div className="h-full flex items-center justify-center">
+        <div className="text-center p-4">
+          <h2 className="text-xl font-bold mb-2">Connecting to Game Server...</h2>
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500 mx-auto"></div>
+        </div>
+      </div>
+    );
+  }
+
+  const handleGameStart = () => {
+    setInGame(true);
+  };
+
   return (
-    <div className="game h-full">
-      <Board  soundStatus={soundStatus}/>
-      {/* <a href="https://www.flaticon.com/free-icons/reject" title="reject icons">Reject icons created by meaicon - Flaticon</a> */}
-      {/* <a href="https://www.flaticon.com/free-icons/letter-o" title="letter o icons">Letter o icons created by Md Tanvirul Haque - Flaticon</a> */}
+    <div className="h-full">
+      {!inGame ? (
+        <GameLobby onGameStart={handleGameStart} />
+      ) : (
+        <GameRoom soundStatus={soundStatus} />
+      )}
     </div>
+  );
+};
+
+function TicTacToe({ soundStatus }) {
+  return (
+    <GameProvider>
+      <div className="game-container h-full">
+        <GameContent soundStatus={soundStatus} />
+      </div>
+    </GameProvider>
   );
 }
 
-export default TicTacToe
+export default TicTacToe;

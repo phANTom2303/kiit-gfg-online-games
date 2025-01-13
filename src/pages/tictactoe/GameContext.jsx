@@ -1,5 +1,5 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
-import io from 'socket.io-client';
+import React, { createContext, useContext, useState, useEffect } from "react";
+import io from "socket.io-client";
 
 const GameContext = createContext();
 
@@ -10,16 +10,16 @@ export const GameProvider = ({ children }) => {
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
-    console.log('Initializing socket connection...');
-    const newSocket = io('http://localhost:3001');
-    
-    newSocket.on('connect', () => {
-      console.log('Socket connected:', newSocket.id);
+    console.log("Initializing socket connection...");
+    const newSocket = io("http://localhost:3001");
+
+    newSocket.on("connect", () => {
+      console.log("Socket connected:", newSocket.id);
       setSocket(newSocket);
     });
 
     return () => {
-      console.log('Cleaning up socket connection');
+      console.log("Cleaning up socket connection");
       newSocket.close();
     };
   }, []);
@@ -28,43 +28,43 @@ export const GameProvider = ({ children }) => {
     if (!socket) return;
 
     const eventHandlers = {
-      'gameCreated': ({ gameId, player, gameState }) => {
-        console.log('Game Created:', { gameId, player, gameState });
+      gameCreated: ({ gameId, player, gameState }) => {
+        console.log("Game Created:", { gameId, player, gameState });
         setPlayer(player);
         setGameState(gameState);
       },
-      'gameJoined': ({ player, gameState }) => {
-        console.log('Game Joined:', { player, gameState });
+      gameJoined: ({ player, gameState }) => {
+        console.log("Game Joined:", { player, gameState });
         setPlayer(player);
         setGameState(gameState);
       },
-      'playerJoined': ({ gameState }) => {
-        console.log('Player Joined:', gameState);
+      playerJoined: ({ gameState }) => {
+        console.log("Player Joined:", gameState);
         setGameState(gameState);
       },
-      'moveMade': ({ gameState }) => {
-        console.log('Move Made:', gameState);
+      moveMade: ({ gameState }) => {
+        console.log("Move Made:", gameState);
         setGameState(gameState);
       },
-      'newMessage': (message) => {
-        console.log('New Message:', message);
-        setMessages(prev => [...prev, message]);
+      newMessage: (message) => {
+        console.log("New Message:", message);
+        setMessages((prev) => [...prev, message]);
       },
-      'gameOver': ({ winner, gameState }) => {
-        console.log('Game Over:', { winner, gameState });
+      gameOver: ({ winner, gameState }) => {
+        console.log("Game Over:", { winner, gameState });
         setGameState(gameState);
       },
-      'gameReset': ({ gameState }) => {
-        console.log('Game Reset:', gameState);
+      gameReset: ({ gameState }) => {
+        console.log("Game Reset:", gameState);
         setGameState(gameState);
       },
-      'playerLeft': ({ playerName }) => {
-        console.log('Player Left:', playerName);
+      playerLeft: ({ playerName }) => {
+        console.log("Player Left:", playerName);
         // Handle player disconnection if needed
       },
-      'error': (error) => {
-        console.error('Socket Error:', error);
-      }
+      error: (error) => {
+        console.error("Socket Error:", error);
+      },
     };
 
     // Register all event handlers
@@ -74,7 +74,7 @@ export const GameProvider = ({ children }) => {
 
     // Cleanup function to remove all event handlers
     return () => {
-      Object.keys(eventHandlers).forEach(event => {
+      Object.keys(eventHandlers).forEach((event) => {
         socket.off(event);
       });
     };
@@ -85,20 +85,18 @@ export const GameProvider = ({ children }) => {
     gameState,
     player,
     messages,
-    setMessages
+    setMessages,
   };
 
   return (
-    <GameContext.Provider value={contextValue}>
-      {children}
-    </GameContext.Provider>
+    <GameContext.Provider value={contextValue}>{children}</GameContext.Provider>
   );
 };
 
 export const useGame = () => {
   const context = useContext(GameContext);
   if (!context) {
-    throw new Error('useGame must be used within a GameProvider');
+    throw new Error("useGame must be used within a GameProvider");
   }
   return context;
 };

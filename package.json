@@ -4,16 +4,22 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "start:server": "node server/server.js",
     "dev": "vite",
+    "start:server": "node server/server.js",
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "start": "vite"
   },
   "dependencies": {
+    "@nextui-org/react": "^2.4.8",
     "express": "^4.18.2",
-    "socket.io": "^4.7.2",
+    "framer-motion": "^11.8.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-icons": "^5.3.0",
+    "socket.io": "^4.8.1",
+    "socket.io-client": "^4.8.1",
     "uuid": "^9.0.1"
   },
   "devDependencies": {
