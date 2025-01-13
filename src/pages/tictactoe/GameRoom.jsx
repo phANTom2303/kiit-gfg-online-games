@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useGame } from "./GameContext";
-import Board from "./Board";
+import Board from "./board";
 import GameChat from "./GameChat";
 
 const GameRoom = ({ soundStatus }) => {
