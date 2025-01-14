@@ -4,7 +4,7 @@ import Board from "./board";
 import GameChat from "./GameChat";
 
 const GameRoom = ({ soundStatus }) => {
-  const { gameState, messages } = useGame();
+  const { gameState, socket, messages } = useGame();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -49,11 +49,7 @@ const GameRoom = ({ soundStatus }) => {
           <Board soundStatus={soundStatus} />
         </div>
         <div className="bg-white rounded-lg shadow-md">
-          <GameChat
-            socket={gameState?.socket}
-            gameState={gameState}
-            messages={messages}
-          />
+          <GameChat socket={socket} gameState={gameState} messages={messages} />
         </div>
       </div>
     </div>
