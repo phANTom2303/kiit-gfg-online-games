@@ -1,122 +1,103 @@
-import { useState } from "react";
+import { useEffect } from "react";
 import Square from "./square";
-import ResetButton from "../../components/resetButton/resetButton.jsx"
+import ResetButton from "../../components/resetButton/resetButton.jsx";
 import playSoundOf from "../../components/soundHandler";
+import { useGame } from "./GameContext";
+
 function Board({ soundStatus }) {
-  const [squares, setSquare] = useState(Array(3).fill(Array(3).fill(null)));
-  const [turn, changeTurn] = useState(1);
-  const [winState, declareWinner] = useState(0);
-  const [message, setMessage] = useState("Turn of X");
+  const { socket, gameState, player } = useGame();
+
+  useEffect(() => {
+    if (!socket || !gameState) return;
+  }, [socket, gameState]);
 
   function handleClick(i, j) {
-    if (winState != 0 || turn > 9 || squares[i][j] != null) {
-      return 0;
+    // Check if it's valid to make a move
+    if (
+      !gameState ||
+      !player ||
+      gameState.winner ||
+      !gameState.players ||
+      gameState.players.length !== 2
+    ) {
+      return;
     }
 
-    //the JSON.parse technique is from gemini AI
-    const nextSquares = JSON.parse(JSON.stringify(squares));
-
-    if (turn % 2 == 1) {
-      nextSquares[i][j] = "X";
-      playSoundOf("pop1", soundStatus);
-    } else {
-      nextSquares[i][j] = "O";
-      playSoundOf("pop2", soundStatus);
-    }
-    setSquare(nextSquares);
-
-    let result = checkWin(i, j, nextSquares);
-    if (result != 0) {
-      setMessage(nextSquares[i][j] + " is the winner.");
-      playSoundOf("game-win", soundStatus);
-      declareWinner(nextSquares[i][j]);
-      return 0;
+    // Check if it's the player's turn
+    if (gameState.currentTurn !== player.id) {
+      return;
     }
 
-    setMessage("Turn of " + ((turn + 1) % 2 == 1 ? "X" : "O"));
-    changeTurn(turn + 1);
-    if (turn == 9 && winState == 0) setMessage("Draw");
-  }
-
-  function checkWin(row, col, grid) {
-    const currentPlayer = grid[row][col];
-    let rowFlag = 1;
-    let colFlag = 1;
-    let d1Flag = 1;
-    let d2Flag = 1;
-    for (let i = 0; i < 3; i++) {
-      if (grid[row][i] != currentPlayer) rowFlag = 0;
-      if (grid[i][col] != currentPlayer) colFlag = 0;
-      if (grid[i][i] != currentPlayer) d1Flag = 0;
-      if (grid[i][2 - i] != currentPlayer) d2Flag = 0;
+    if (gameState.board[i][j] !== null) {
+      return;
     }
 
-    if (rowFlag == 1 || colFlag == 1 || d1Flag == 1 || d2Flag == 1)
-      return currentPlayer;
-    else return 0;
+    socket.emit("makeMove", {
+      gameId: gameState.id,
+      row: i,
+      col: j,
+    });
+
+    playSoundOf(player.symbol === "X" ? "pop1" : "pop2", soundStatus);
   }
 
   function resetGame() {
-    setSquare(Array(3).fill(Array(3).fill(null)));
-    changeTurn(1);
-    setMessage("Turn of X");
+    if (!gameState) return;
+
+    socket.emit("resetGame", {
+      gameId: gameState.id,
+    });
+
     playSoundOf("game-reset", soundStatus);
-    declareWinner(0);
   }
+
+  const getStatusMessage = () => {
+    if (!gameState || !gameState.players || gameState.players.length < 2) {
+      return "Waiting for opponent...";
+    }
+
+    if (gameState.winner) {
+      if (gameState.winner === "draw") {
+        return "Game Over - It's a Draw!";
+      }
+      return `Game Over - ${gameState.winner.name} wins!`;
+    }
+
+    const currentPlayer = gameState.players.find(
+      (p) => p.id === gameState.currentTurn
+    );
+    if (!currentPlayer) return "";
+
+    if (player.id === gameState.currentTurn) {
+      return "Your turn";
+    } else {
+      return `${currentPlayer.name}'s turn`;
+    }
+  };
 
   return (
     <div className="tictactoe">
-      <div className="prompt-box">{message} </div>
+      <div className="prompt-box">{getStatusMessage()}</div>
       <div className="board">
-        <div className="row">
-          <Square
-            value={squares[0][0]}
-            onSquareClick={() => handleClick(0, 0)}
-          />
-          <Square
-            value={squares[0][1]}
-            onSquareClick={() => handleClick(0, 1)}
-          />
-          <Square
-            value={squares[0][2]}
-            onSquareClick={() => handleClick(0, 2)}
-          />
-        </div>
-        <div className="row">
-          <Square
-            value={squares[1][0]}
-            onSquareClick={() => handleClick(1, 0)}
-          />
-          <Square
-            value={squares[1][1]}
-            onSquareClick={() => handleClick(1, 1)}
-          />
-          <Square
-            value={squares[1][2]}
-            onSquareClick={() => handleClick(1, 2)}
-          />
-        </div>
-        <div className="row">
-          <Square
-            value={squares[2][0]}
-            onSquareClick={() => handleClick(2, 0)}
-          />
-          <Square
-            value={squares[2][1]}
-            onSquareClick={() => handleClick(2, 1)}
-          />
-          <Square
-            value={squares[2][2]}
-            onSquareClick={() => handleClick(2, 2)}
-          />
-        </div>
+        {[0, 1, 2].map((row) => (
+          <div key={row} className="row">
+            {[0, 1, 2].map((col) => (
+              <Square
+                key={`${row}-${col}`}
+                value={gameState?.board?.[row]?.[col]}
+                onSquareClick={() => handleClick(row, col)}
+              />
+            ))}
+          </div>
+        ))}
       </div>
       <ResetButton
         src={"../../images/restart icon.png"}
         alt={"reset"}
-        onClick={() => resetGame()}
+        onClick={resetGame}
       />
     </div>
   );
 }
+
 export default Board;
