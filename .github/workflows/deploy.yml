@@ -51,4 +51,4 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
       - name: Start Server
-        run: npm rur start:server
+        run: npm run start:server
