@@ -13,7 +13,6 @@
   },
   "dependencies": {
     "@nextui-org/react": "^2.4.8",
-    "concurrently": "^9.1.2",
     "express": "^4.18.2",
     "framer-motion": "^11.8.0",
     "react": "^18.2.0",
@@ -26,6 +25,7 @@
   "devDependencies": {
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",
+    "concurrently": "^9.1.2",
     "@vitejs/plugin-react": "^4.2.1",
     "autoprefixer": "^10.4.20",
     "eslint": "^8.57.0",
