@@ -8,8 +8,7 @@
     "server": "node server/server.js",
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview",
-    "start": "concurrently \"vite\" \"node server/server.js\" "
+    "preview": "vite preview"
   },
   "dependencies": {
     "@nextui-org/react": "^2.4.8",
@@ -25,7 +24,6 @@
   "devDependencies": {
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",
-    "concurrently": "^9.1.2",
     "@vitejs/plugin-react": "^4.2.1",
     "autoprefixer": "^10.4.20",
     "eslint": "^8.57.0",
