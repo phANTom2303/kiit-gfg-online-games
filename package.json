@@ -9,7 +9,6 @@
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "start": "concurrently \"vite\" \"node server/server.js\" ",
-    "test": "npm run start:server && npm run start"
   },
   "dependencies": {
     "@nextui-org/react": "^2.4.8",
