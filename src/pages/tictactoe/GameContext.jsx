@@ -11,7 +11,13 @@ export const GameProvider = ({ children }) => {
 
   useEffect(() => {
     console.log("Initializing socket connection...");
-    const newSocket = io("http://localhost:3001", {
+    let baseUrl = "http://localhost:3001";
+    try {
+      baseUrl = process.env.BASE_URL;
+    } catch (error) {
+      console.error(error);
+    }
+    const newSocket = io(baseUrl, {
       path: "/server/socket.io",
     });
 
