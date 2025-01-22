@@ -11,6 +11,7 @@ const io = new Server(server, {
     origin: "*",
     methods: ["GET", "POST"],
   },
+  path: "/server/socket.io",
 });
 
 const games = new Map();
