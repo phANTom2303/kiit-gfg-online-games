@@ -11,7 +11,7 @@ export const GameProvider = ({ children }) => {
 
   useEffect(() => {
     console.log("Initializing socket connection...");
-    const newSocket = io("https://online-games-gfg.vercel.app", {
+    const newSocket = io("http://localhost:3001", {
       path: "/server/socket.io",
     });
 
