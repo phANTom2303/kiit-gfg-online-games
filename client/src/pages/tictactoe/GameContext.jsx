@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import io from "socket.io-client";
+require("dotenv/config");
 
 const GameContext = createContext();
 
@@ -11,13 +12,14 @@ export const GameProvider = ({ children }) => {
 
   useEffect(() => {
     console.log("Initializing socket connection...");
-    let baseUrl = "http://localhost:3001";
+    let baseUrl = "https://online-games-gfg-backend.koyeb.app";
     try {
       baseUrl = process.env.BASE_URL;
     } catch (error) {
       console.error(error);
     }
     const newSocket = io(baseUrl);
+    console.log(newSocket);
 
     newSocket.on("connect", () => {
       console.log("Socket connected:", newSocket.id);
