@@ -11,14 +11,16 @@ export const GameProvider = ({ children }) => {
 
   useEffect(() => {
     console.log("Initializing socket connection...");
-    let baseUrl = "https://online-games-gfg-backend.koyeb.app";
+    let baseUrl = "http://localhost:3001";
     try {
       baseUrl = process.env.BASE_URL;
     } catch (error) {
       console.error(error);
     }
-    const newSocket = io(baseUrl);
-    console.log(newSocket);
+    let newSocket = io(baseUrl);
+    if (newSocket == null) {
+      newSocket = io("https://online-games-gfg-backend.koyeb.app");
+    }
 
     newSocket.on("connect", () => {
       console.log("Socket connected:", newSocket.id);
