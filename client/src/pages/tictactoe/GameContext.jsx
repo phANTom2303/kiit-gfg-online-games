@@ -1,6 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import io from "socket.io-client";
-require("dotenv/config");
 
 const GameContext = createContext();
 
