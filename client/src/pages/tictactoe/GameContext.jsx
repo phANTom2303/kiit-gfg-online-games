@@ -17,9 +17,7 @@ export const GameProvider = ({ children }) => {
     } catch (error) {
       console.error(error);
     }
-    const newSocket = io(baseUrl, {
-      path: "/server/socket.io",
-    });
+    const newSocket = io(baseUrl);
 
     newSocket.on("connect", () => {
       console.log("Socket connected:", newSocket.id);
