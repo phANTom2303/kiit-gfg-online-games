@@ -1,8 +1,8 @@
 import { useEffect } from "react";
-import Square from "./square";
+import Square from "./square.jsx";
 import ResetButton from "../../components/resetButton/resetButton.jsx";
-import playSoundOf from "../../components/soundHandler";
-import { useGame } from "./GameContext";
+import playSoundOf from "../../components/soundHandler.js";
+import { useGame } from "./GameContext.jsx";
 
 function Board({ soundStatus }) {
   const { socket, gameState, player } = useGame();

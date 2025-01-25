@@ -11,24 +11,37 @@ export const GameProvider = ({ children }) => {
 
   useEffect(() => {
     console.log("Initializing socket connection...");
-    let baseUrl = "http://localhost:3001";
-    try {
-      baseUrl = process.env.BASE_URL;
-    } catch (error) {
-      console.error(error);
-    }
-    const newSocket = io(baseUrl, {
-      path: "/server/socket.io",
-    });
+    const primaryUrl = "http://localhost:3001";
+    const secondaryUrl = "https://online-games-gfg-backend.koyeb.app";
 
-    newSocket.on("connect", () => {
-      console.log("Socket connected:", newSocket.id);
-      setSocket(newSocket);
-    });
+    const connectSocket = (url) => {
+      const newSocket = io(url, {
+        reconnectionAttempts: 1,
+        timeout: 5000,
+      });
+
+      newSocket.on("connect", () => {
+        console.log("Socket connected:", newSocket.id, "at", url);
+        setSocket(newSocket);
+      });
+
+      newSocket.on("connect_error", (err) => {
+        console.log(`Connection failed to ${url}:`, err.message);
+        if (url === primaryUrl) {
+          console.log("Attempting connection to the secondary server...");
+          connectSocket(secondaryUrl);
+        }
+      });
+
+      return newSocket;
+    };
+
+    const initialSocket = connectSocket(primaryUrl);
 
     return () => {
-      console.log("Cleaning up socket connection");
-      newSocket.close();
+      console.log("Cleaning up socket connection...");
+      initialSocket?.close();
+      socket?.close();
     };
   }, []);
 
