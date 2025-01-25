@@ -8,6 +8,8 @@ export const GameProvider = ({ children }) => {
   const [gameState, setGameState] = useState(null);
   const [player, setPlayer] = useState(null);
   const [messages, setMessages] = useState([]);
+  const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     console.log("Initializing socket connection...");
@@ -50,50 +52,47 @@ export const GameProvider = ({ children }) => {
 
     const eventHandlers = {
       gameCreated: ({ gameId, player, gameState }) => {
-        console.log("Game Created:", { gameId, player, gameState });
+        setError(null);
         setPlayer(player);
         setGameState(gameState);
+        setIsLoading(false);
       },
       gameJoined: ({ player, gameState }) => {
-        console.log("Game Joined:", { player, gameState });
+        setError(null);
         setPlayer(player);
         setGameState(gameState);
+        setIsLoading(false);
       },
       playerJoined: ({ gameState }) => {
-        console.log("Player Joined:", gameState);
         setGameState(gameState);
       },
       moveMade: ({ gameState }) => {
-        console.log("Move Made:", gameState);
         setGameState(gameState);
       },
       newMessage: (message) => {
-        console.log("New Message:", message);
         setMessages((prev) => [...prev, message]);
       },
       gameOver: ({ winner, gameState }) => {
-        console.log("Game Over:", { winner, gameState });
         setGameState(gameState);
       },
       gameReset: ({ gameState }) => {
-        console.log("Game Reset:", gameState);
         setGameState(gameState);
       },
       playerLeft: ({ playerName }) => {
-        console.log("Player Left:", playerName);
-        // Handle player disconnection if needed
+        setError(`${playerName} has left the game`);
       },
-      error: (error) => {
-        console.error("Socket Error:", error);
+      error: (errorMessage) => {
+        setError(errorMessage);
+        setIsLoading(false);
+        setGameState(null);
+        setPlayer(null);
       },
     };
 
-    // Register all event handlers
     Object.entries(eventHandlers).forEach(([event, handler]) => {
       socket.on(event, handler);
     });
 
-    // Cleanup function to remove all event handlers
     return () => {
       Object.keys(eventHandlers).forEach((event) => {
         socket.off(event);
@@ -101,16 +100,22 @@ export const GameProvider = ({ children }) => {
     };
   }, [socket]);
 
-  const contextValue = {
-    socket,
-    gameState,
-    player,
-    messages,
-    setMessages,
-  };
-
   return (
-    <GameContext.Provider value={contextValue}>{children}</GameContext.Provider>
+    <GameContext.Provider
+      value={{
+        socket,
+        gameState,
+        player,
+        messages,
+        error,
+        isLoading,
+        setMessages,
+        setError,
+        setIsLoading,
+      }}
+    >
+      {children}
+    </GameContext.Provider>
   );
 };
 

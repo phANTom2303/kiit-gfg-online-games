@@ -1,8 +1,8 @@
 import { useEffect } from "react";
-import Square from "./square.jsx";
+import Square from "./square";
 import ResetButton from "../../components/resetButton/resetButton.jsx";
-import playSoundOf from "../../components/soundHandler.js";
-import { useGame } from "./GameContext.jsx";
+import playSoundOf from "../../components/soundHandler";
+import { useGame } from "./GameContext";
 
 function Board({ soundStatus }) {
   const { socket, gameState, player } = useGame();
@@ -12,7 +12,6 @@ function Board({ soundStatus }) {
   }, [socket, gameState]);
 
   function handleClick(i, j) {
-    // Check if it's valid to make a move
     if (
       !gameState ||
       !player ||
@@ -23,7 +22,6 @@ function Board({ soundStatus }) {
       return;
     }
 
-    // Check if it's the player's turn
     if (gameState.currentTurn !== player.id) {
       return;
     }

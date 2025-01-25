@@ -1,8 +1,7 @@
-// server.js
 import express from "express";
 import { createServer } from "http";
 import { Server } from "socket.io";
-import { v4 as uuidv4 } from "uuid";
+import otpGenerator from "otp-generator";
 
 const app = express();
 const server = createServer(app);
@@ -14,15 +13,29 @@ const io = new Server(server, {
 });
 
 const games = new Map();
-
 const players = new Map();
+
+function generateUniqueGameCode() {
+  const code = otpGenerator.generate(6, {
+    upperCaseAlphabets: true,
+    specialChars: false,
+    lowerCaseAlphabets: false,
+    digits: true,
+  });
+
+  if (games.has(code)) {
+    return generateUniqueGameCode();
+  }
+
+  return code;
+}
 
 io.on("connection", (socket) => {
   console.log("User connected:", socket.id);
 
   socket.on("createGame", (playerName) => {
     console.log(`Creating game for player: ${playerName}`);
-    const gameId = uuidv4();
+    const gameId = generateUniqueGameCode();
     const player = {
       id: socket.id,
       name: playerName,
@@ -37,6 +50,7 @@ io.on("connection", (socket) => {
       players: [player],
       currentTurn: player.id,
       messages: [],
+      winner: null,
     };
 
     games.set(gameId, gameState);
@@ -56,17 +70,23 @@ io.on("connection", (socket) => {
 
   socket.on("joinGame", ({ gameId, playerName }) => {
     console.log(`Player ${playerName} attempting to join game ${gameId}`);
-    const game = games.get(gameId);
+    const game = games.get(gameId.toUpperCase());
 
     if (!game) {
       console.log("Game not found");
-      socket.emit("error", "Game not found");
+      socket.emit(
+        "error",
+        "Game not found. Please check the room code and try again."
+      );
       return;
     }
 
     if (game.players.length >= 2) {
       console.log("Game is full");
-      socket.emit("error", "Game is full");
+      socket.emit(
+        "error",
+        "This game is full. Please create a new game or join a different one."
+      );
       return;
     }
 
@@ -78,18 +98,18 @@ io.on("connection", (socket) => {
 
     game.players.push(player);
     players.set(socket.id, {
-      gameId,
+      gameId: gameId.toUpperCase(),
       name: playerName,
     });
 
-    socket.join(gameId);
+    socket.join(gameId.toUpperCase());
     socket.emit("gameJoined", {
-      gameId,
+      gameId: gameId.toUpperCase(),
       player,
       gameState: game,
     });
 
-    io.to(gameId).emit("playerJoined", {
+    io.to(gameId.toUpperCase()).emit("playerJoined", {
       player,
       gameState: game,
     });
@@ -99,21 +119,13 @@ io.on("connection", (socket) => {
 
   socket.on("makeMove", ({ gameId, row, col }) => {
     const game = games.get(gameId);
-    if (!game || game.currentTurn !== socket.id) return;
+    if (!game || game.currentTurn !== socket.id || game.winner) return;
 
     const player = game.players.find((p) => p.id === socket.id);
     if (!player) return;
 
     if (game.board[row][col] === null) {
       game.board[row][col] = player.symbol;
-      game.currentTurn = game.players.find((p) => p.id !== socket.id).id;
-
-      io.to(gameId).emit("moveMade", {
-        row,
-        col,
-        player,
-        gameState: game,
-      });
 
       const winner = checkWinner(game.board);
       if (winner) {
@@ -126,6 +138,14 @@ io.on("connection", (socket) => {
         game.winner = "draw";
         io.to(gameId).emit("gameOver", {
           winner: "draw",
+          gameState: game,
+        });
+      } else {
+        game.currentTurn = game.players.find((p) => p.id !== socket.id).id;
+        io.to(gameId).emit("moveMade", {
+          row,
+          col,
+          player,
           gameState: game,
         });
       }
@@ -174,10 +194,9 @@ io.on("connection", (socket) => {
           playerName: player.name,
         });
 
-        if (game.players.every((p) => p.id === socket.id)) {
+        game.players = game.players.filter((p) => p.id !== socket.id);
+        if (game.players.length === 0) {
           games.delete(player.gameId);
-        } else {
-          game.players = game.players.filter((p) => p.id !== socket.id);
         }
       }
       players.delete(socket.id);
