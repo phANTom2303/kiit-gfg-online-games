@@ -1,8 +1,8 @@
 import "./connect4.css";
-import C4tile from "./C4tile";
+import C4tile from "./C4tile.jsx";
 import { useState } from "react";
 import ResetButton from "../../components/resetButton/resetButton.jsx";
-import playSoundOf from "../../components/soundHandler";
+import playSoundOf from "../../components/soundHandler.js";
 function Connect4({ soundStatus }) {
   const [tiles, setTile] = useState(Array(7).fill(Array(6).fill(null)));
   const [player, setPlayer] = useState(1);
