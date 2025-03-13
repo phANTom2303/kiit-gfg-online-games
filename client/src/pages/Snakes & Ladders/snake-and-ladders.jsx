@@ -222,126 +222,27 @@ export default function SnakeAndLadders({ soundStatus }) {
         </div>
 
         <div className="slboard">
-          <div className="row">
-            <PlayerTile tileString={playerBoard[99]} />
-            <PlayerTile tileString={playerBoard[98]} />
-            <PlayerTile tileString={playerBoard[97]} />
-            <PlayerTile tileString={playerBoard[96]} />
-            <PlayerTile tileString={playerBoard[95]} />
-            <PlayerTile tileString={playerBoard[94]} />
-            <PlayerTile tileString={playerBoard[93]} />
-            <PlayerTile tileString={playerBoard[92]} />
-            <PlayerTile tileString={playerBoard[91]} />
-            <PlayerTile tileString={playerBoard[90]} />
-          </div>
-          <div className="row">
-            <PlayerTile tileString={playerBoard[80]} />
-            <PlayerTile tileString={playerBoard[81]} />
-            <PlayerTile tileString={playerBoard[82]} />
-            <PlayerTile tileString={playerBoard[83]} />
-            <PlayerTile tileString={playerBoard[84]} />
-            <PlayerTile tileString={playerBoard[85]} />
-            <PlayerTile tileString={playerBoard[86]} />
-            <PlayerTile tileString={playerBoard[87]} />
-            <PlayerTile tileString={playerBoard[88]} />
-            <PlayerTile tileString={playerBoard[89]} />
-          </div>
-          <div className="row">
-            <PlayerTile tileString={playerBoard[79]} />
-            <PlayerTile tileString={playerBoard[78]} />
-            <PlayerTile tileString={playerBoard[77]} />
-            <PlayerTile tileString={playerBoard[76]} />
-            <PlayerTile tileString={playerBoard[75]} />
-            <PlayerTile tileString={playerBoard[74]} />
-            <PlayerTile tileString={playerBoard[73]} />
-            <PlayerTile tileString={playerBoard[72]} />
-            <PlayerTile tileString={playerBoard[71]} />
-            <PlayerTile tileString={playerBoard[70]} />
-          </div>
-          <div className="row">
-            <PlayerTile tileString={playerBoard[60]} />
-            <PlayerTile tileString={playerBoard[61]} />
-            <PlayerTile tileString={playerBoard[62]} />
-            <PlayerTile tileString={playerBoard[63]} />
-            <PlayerTile tileString={playerBoard[64]} />
-            <PlayerTile tileString={playerBoard[65]} />
-            <PlayerTile tileString={playerBoard[66]} />
-            <PlayerTile tileString={playerBoard[67]} />
-            <PlayerTile tileString={playerBoard[68]} />
-            <PlayerTile tileString={playerBoard[69]} />
-          </div>
-          <div className="row">
-            <PlayerTile tileString={playerBoard[59]} />
-            <PlayerTile tileString={playerBoard[58]} />
-            <PlayerTile tileString={playerBoard[57]} />
-            <PlayerTile tileString={playerBoard[56]} />
-            <PlayerTile tileString={playerBoard[55]} />
-            <PlayerTile tileString={playerBoard[54]} />
-            <PlayerTile tileString={playerBoard[53]} />
-            <PlayerTile tileString={playerBoard[52]} />
-            <PlayerTile tileString={playerBoard[51]} />
-            <PlayerTile tileString={playerBoard[50]} />
-          </div>
-          <div className="row">
-            <PlayerTile tileString={playerBoard[40]} />
-            <PlayerTile tileString={playerBoard[41]} />
-            <PlayerTile tileString={playerBoard[42]} />
-            <PlayerTile tileString={playerBoard[43]} />
-            <PlayerTile tileString={playerBoard[44]} />
-            <PlayerTile tileString={playerBoard[45]} />
-            <PlayerTile tileString={playerBoard[46]} />
-            <PlayerTile tileString={playerBoard[47]} />
-            <PlayerTile tileString={playerBoard[48]} />
-            <PlayerTile tileString={playerBoard[49]} />
-          </div>
-          <div className="row">
-            <PlayerTile tileString={playerBoard[39]} />
-            <PlayerTile tileString={playerBoard[38]} />
-            <PlayerTile tileString={playerBoard[37]} />
-            <PlayerTile tileString={playerBoard[36]} />
-            <PlayerTile tileString={playerBoard[35]} />
-            <PlayerTile tileString={playerBoard[34]} />
-            <PlayerTile tileString={playerBoard[33]} />
-            <PlayerTile tileString={playerBoard[32]} />
-            <PlayerTile tileString={playerBoard[31]} />
-            <PlayerTile tileString={playerBoard[30]} />
-          </div>
-          <div className="row">
-            <PlayerTile tileString={playerBoard[20]} />
-            <PlayerTile tileString={playerBoard[21]} />
-            <PlayerTile tileString={playerBoard[22]} />
-            <PlayerTile tileString={playerBoard[23]} />
-            <PlayerTile tileString={playerBoard[24]} />
-            <PlayerTile tileString={playerBoard[25]} />
-            <PlayerTile tileString={playerBoard[26]} />
-            <PlayerTile tileString={playerBoard[27]} />
-            <PlayerTile tileString={playerBoard[28]} />
-            <PlayerTile tileString={playerBoard[29]} />
-          </div>
-          <div className="row">
-            <PlayerTile tileString={playerBoard[19]} />
-            <PlayerTile tileString={playerBoard[18]} />
-            <PlayerTile tileString={playerBoard[17]} />
-            <PlayerTile tileString={playerBoard[16]} />
-            <PlayerTile tileString={playerBoard[15]} />
-            <PlayerTile tileString={playerBoard[14]} />
-            <PlayerTile tileString={playerBoard[13]} />
-            <PlayerTile tileString={playerBoard[12]} />
-            <PlayerTile tileString={playerBoard[11]} />
-            <PlayerTile tileString={playerBoard[10]} />
-          </div>
-          <div className="row">
-            <PlayerTile tileString={playerBoard[0]} />
-            <PlayerTile tileString={playerBoard[1]} />
-            <PlayerTile tileString={playerBoard[2]} />
-            <PlayerTile tileString={playerBoard[3]} />
-            <PlayerTile tileString={playerBoard[4]} />
-            <PlayerTile tileString={playerBoard[5]} />
-            <PlayerTile tileString={playerBoard[6]} />
-            <PlayerTile tileString={playerBoard[7]} />
-            <PlayerTile tileString={playerBoard[8]} />
-            <PlayerTile tileString={playerBoard[9]} />
-          </div>
+          {Array(10)
+            .fill()
+            .map((item2, rowIndex) => (
+              <div key={rowIndex} className="row">
+                {Array(10)
+                  .fill()
+                  .map((item, colIndex) =>
+                    rowIndex % 2 == 0 ? (
+                      <PlayerTile
+                        key={colIndex}
+                        tileString={playerBoard[99 - (rowIndex * 10 + colIndex)]}
+                      />
+                    ) : (
+                      <PlayerTile
+                        key={colIndex}
+                        tileString={playerBoard[99 - (rowIndex * 10 + 9 - colIndex)]}
+                      />
+                    )
+                  )}
+              </div>
+            ))}
         </div>
 
         <div className="bottom-controls">
