@@ -4,9 +4,6 @@ import { Server } from "socket.io";
 import otpGenerator from "otp-generator";
 
 const app = express();
-app.all("/", (req, res) => {
-  res.send("Server is online.");
-});
 const server = createServer(app);
 const io = new Server(server, {
   cors: {
