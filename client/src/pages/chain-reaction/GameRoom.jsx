@@ -3,17 +3,24 @@ import { useGame } from "./GameContext";
 import Board from "./board";
 import GameChat from "./GameChat";
 
-const GameRoom = ({ soundStatus }) => {
+const GameRoom = ({ soundStatus, onLeaveGame }) => {
   const { gameState, socket, messages } = useGame();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 5000);
+    }, 3000);
 
     return () => clearTimeout(timer);
   }, []);
+
+  const handleLeaveGame = () => {
+    if (socket && gameState) {
+      socket.emit("leaveGame", { gameId: gameState.id });
+    }
+    onLeaveGame();
+  };
 
   if (loading) {
     return (
@@ -51,6 +58,15 @@ const GameRoom = ({ soundStatus }) => {
         <div className="bg-white rounded-lg shadow-md">
           <GameChat socket={socket} gameState={gameState} messages={messages} />
         </div>
+      </div>
+
+      <div className="mt-6 text-center">
+        <button
+          onClick={handleLeaveGame}
+          className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition-colors"
+        >
+          Leave Game
+        </button>
       </div>
     </div>
   );
