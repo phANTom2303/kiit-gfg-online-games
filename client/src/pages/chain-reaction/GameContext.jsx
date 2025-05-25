@@ -13,8 +13,9 @@ export const GameProvider = ({ children }) => {
 
   // Connection logic
   useEffect(() => {
-    const primaryUrl = "http://localhost:3001";
-    const secondaryUrl = "https://your-deployed-server.com";
+    const primaryUrl = "http://localhost:3001/chainreact"; // Replace with your primary server URL
+    const secondaryUrl =
+      "https://online-games-gfg-backend.koyeb.app/chainreact"; // Replace with your secondary server URL
 
     const connectSocket = (url) => {
       const newSocket = io(url, {
@@ -48,71 +49,71 @@ export const GameProvider = ({ children }) => {
   }, []);
 
   // Game event handlers
- // Game event handlers
-useEffect(() => {
-  if (!socket) return;
+  // Game event handlers
+  useEffect(() => {
+    if (!socket) return;
 
-  const eventHandlers = {
-    gameCreated: ({ gameId, player, gameState }) => {
-      console.log("Game Created - Player:", player);
-      console.log("Game Created - Game State:", gameState);
-      setError(null);
-      setPlayer(player);
-      setGameState(gameState);
-      setIsLoading(false);
-    },
-    gameJoined: ({ player, gameState }) => {
-      console.log("Game Joined - Player:", player);
-      console.log("Game Joined - Game State:", gameState);
-      setError(null);
-      setPlayer(player);
-      setGameState(gameState);
-      setIsLoading(false);
-    },
-    playerJoined: ({ gameState }) => {
-      setGameState(gameState);
-    },
-    moveMade: ({ gameState, row, col, player }) => {
-      console.log('Move made:', { gameState, row, col, player });
-      setGameState(gameState);
-    },
-    atomsExploded: ({ gameState }) => {
-      setGameState(gameState);
-    },
-    chainReactionComplete: ({ gameState }) => {
-      setGameState(gameState);
-    },
-    newMessage: (message) => {
-      setMessages((prev) => [...prev, message]);
-    },
-    gameOver: ({ winner, gameState }) => {
-      setGameState(gameState);
-    },
-    gameReset: ({ gameState }) => {
-      setGameState(gameState);
-    },
-    playerLeft: ({ playerName }) => {
-      setError(`${playerName} has left the game`);
-    },
-    error: (errorMessage) => {
-      console.error('Game Error:', errorMessage);
-      setError(errorMessage);
-      setIsLoading(false);
-      setGameState(null);
-      setPlayer(null);
-    },
-  };
+    const eventHandlers = {
+      gameCreated: ({ gameId, player, gameState }) => {
+        console.log("Game Created - Player:", player);
+        console.log("Game Created - Game State:", gameState);
+        setError(null);
+        setPlayer(player);
+        setGameState(gameState);
+        setIsLoading(false);
+      },
+      gameJoined: ({ player, gameState }) => {
+        console.log("Game Joined - Player:", player);
+        console.log("Game Joined - Game State:", gameState);
+        setError(null);
+        setPlayer(player);
+        setGameState(gameState);
+        setIsLoading(false);
+      },
+      playerJoined: ({ gameState }) => {
+        setGameState(gameState);
+      },
+      moveMade: ({ gameState, row, col, player }) => {
+        console.log("Move made:", { gameState, row, col, player });
+        setGameState(gameState);
+      },
+      atomsExploded: ({ gameState }) => {
+        setGameState(gameState);
+      },
+      chainReactionComplete: ({ gameState }) => {
+        setGameState(gameState);
+      },
+      newMessage: (message) => {
+        setMessages((prev) => [...prev, message]);
+      },
+      gameOver: ({ winner, gameState }) => {
+        setGameState(gameState);
+      },
+      gameReset: ({ gameState }) => {
+        setGameState(gameState);
+      },
+      playerLeft: ({ playerName }) => {
+        setError(`${playerName} has left the game`);
+      },
+      error: (errorMessage) => {
+        console.error("Game Error:", errorMessage);
+        setError(errorMessage);
+        setIsLoading(false);
+        setGameState(null);
+        setPlayer(null);
+      },
+    };
 
-  Object.entries(eventHandlers).forEach(([event, handler]) => {
-    socket.on(event, handler);
-  });
-
-  return () => {
-    Object.keys(eventHandlers).forEach((event) => {
-      socket.off(event);
+    Object.entries(eventHandlers).forEach(([event, handler]) => {
+      socket.on(event, handler);
     });
-  };
-}, [socket]);
+
+    return () => {
+      Object.keys(eventHandlers).forEach((event) => {
+        socket.off(event);
+      });
+    };
+  }, [socket]);
 
   return (
     <GameContext.Provider

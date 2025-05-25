@@ -13,8 +13,8 @@ export const GameProvider = ({ children }) => {
 
   useEffect(() => {
     console.log("Initializing socket connection...");
-    const primaryUrl = "http://localhost:3001";
-    const secondaryUrl = "https://online-games-gfg-backend.koyeb.app";
+    const primaryUrl = "http://localhost:3001/tictactoe";
+    const secondaryUrl = "https://online-games-gfg-backend.koyeb.app/tictactoe";
 
     const connectSocket = (url) => {
       const newSocket = io(url, {

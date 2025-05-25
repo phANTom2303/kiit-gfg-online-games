@@ -3,7 +3,6 @@ import otpGenerator from "otp-generator";
 
 const router = express.Router();
 
-
 const games = new Map();
 const players = new Map();
 
