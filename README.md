@@ -9,8 +9,7 @@
 [![Made with React](https://img.shields.io/badge/Made%20with-React-61DAFB?style=for-the-badge&logo=react)](https://reactjs.org/)
 [![Powered by Node.js](https://img.shields.io/badge/Powered%20by-Node.js-339933?style=for-the-badge&logo=node.js)](https://nodejs.org/)
 [![Socket.IO](https://img.shields.io/badge/Socket.IO-010101?style=for-the-badge&logo=socket.io)](https://socket.io/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
-[![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
+[![Tailwind](https://img.shields.io/badge/Tailwind-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
 [![Express.js](https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express)](https://expressjs.com/)
 
 </div>
@@ -145,38 +144,8 @@ This project was created with ❤️ by the GeeksforGeeks Student Chapter at KII
 
 <div align="center">
 
-<table style="width: 100%;">
-<tr>
-<th>Developer</th>
-<th>GitHub Profile</th>
-<th>Role</th>
-</tr>
-<tr>
-<td><strong>phANTom2303</strong></td>
-<td><a href="https://github.com/phANTom2303"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub"></a></td>
-<td>Lead Developer</td>
-</tr>
-<tr>
-<td><strong>VanXodus305</strong></td>
-<td><a href="https://github.com/VanXodus305"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub"></a></td>
-<td>Full Stack Developer</td>
-</tr>
-<tr>
-<td><strong>hritika2409</strong></td>
-<td><a href="https://github.com/hritika2409"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub"></a></td>
-<td>Backend Developer</td>
-</tr>
-<tr>
-<td><strong>ashish-xt</strong></td>
-<td><a href="https://github.com/ashish-xt"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub"></a></td>
-<td>Backend Developer</td>
-</tr>
-<tr>
-<td><strong>sakettt25</strong></td>
-<td><a href="https://github.com/sakettt25"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub"></a></td>
-<td>Frontend Developer</td>
-</tr>
-</table>
+| Developer       | GitHub Profile                                                                                                                          | Role                 |
+| --------------- | --------------------------------------------------------------------------------------------------------------------------------------- | -------------------- |
 | **phANTom2303** | [![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/phANTom2303) | Lead Developer       |
 | **VanXodus305** | [![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/VanXodus305) | Full Stack Developer |
 | **hritika2409** | [![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/hritika2409) | Backend Developer    |
