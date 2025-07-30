@@ -2,7 +2,8 @@
 
 <div align="center">
 
-![GFG Online Games Website](client/public/images/online%20game%20logo.png)
+<img src="client/public/images/online%20game%20logo.png" alt="GFG Online Games Website" width="256" />
+
 
 **A collection of classic multiplayer games built for the web**
 
